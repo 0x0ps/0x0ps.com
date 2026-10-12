@@ -122,43 +122,46 @@
   .profile-frame {
     position: relative; z-index: 2;
     display: flex; flex-direction: column;
-    align-items: center; gap: 20px;
+    align-items: center; gap: 32px;
   }
   .profile-img-wrap {
     width: 200px; height: 200px;
     position: relative;
+    isolation: isolate;
   }
-  /* CROSSHAIR RETICLE — replaces the tilted square frames */
+  /* HIGH-CONTRAST CROSSHAIR RETICLE — compact, with clear separation from badge */
   .profile-img-wrap::before {
     content: '';
     position: absolute;
-    inset: -19px;
-    border: 1px solid var(--accent);
+    inset: -15px;
+    border: 2px solid var(--accent);
     border-radius: 50%;
     background:
       repeating-conic-gradient(
         from 0deg,
         transparent 0deg 14deg,
-        rgba(167,255,50,0.8) 14deg 15deg,
-        transparent 15deg 30deg
+        rgba(167,255,50,0.98) 14deg 15.5deg,
+        transparent 15.5deg 30deg
       );
-    -webkit-mask: radial-gradient(circle, transparent 72%, #000 73%);
-    mask: radial-gradient(circle, transparent 72%, #000 73%);
-    opacity: 0.85;
+    -webkit-mask: radial-gradient(circle, transparent 75%, #000 76%);
+    mask: radial-gradient(circle, transparent 75%, #000 76%);
+    opacity: 1;
+    filter: drop-shadow(0 0 3px rgba(167,255,50,0.45));
     pointer-events: none;
   }
   .profile-img-wrap::after {
     content: '';
     position: absolute;
-    inset: -28px;
-    border: 1px solid var(--accent-dim);
+    inset: -22px;
+    border: 2px solid var(--accent);
     border-radius: 50%;
     background:
-      linear-gradient(var(--accent-dim), var(--accent-dim)) center top / 1px 12px no-repeat,
-      linear-gradient(var(--accent-dim), var(--accent-dim)) center bottom / 1px 12px no-repeat,
-      linear-gradient(var(--accent-dim), var(--accent-dim)) left center / 12px 1px no-repeat,
-      linear-gradient(var(--accent-dim), var(--accent-dim)) right center / 12px 1px no-repeat;
-    opacity: 0.65;
+      linear-gradient(var(--accent), var(--accent)) center top / 2px 16px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) center bottom / 2px 16px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) left center / 16px 2px no-repeat,
+      linear-gradient(var(--accent), var(--accent)) right center / 16px 2px no-repeat;
+    opacity: 0.95;
+    filter: drop-shadow(0 0 3px rgba(167,255,50,0.4));
     pointer-events: none;
   }
   .profile-img {
