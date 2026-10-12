@@ -3,9 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Selected labs, experiments, and research interests by Davide Vesentini (null0x).">
+<meta name="description" content="Explore cybersecurity labs, technical experiments, and research interests from Davide Vesentini (null0x), covering offensive security, networking, and AI security.">
 <meta name="theme-color" content="#050705">
-<title>Projects & Research — Davide Vesentini | 0x0ps</title>
+<title>Cybersecurity Projects & Research | Davide Vesentini — 0x0ps</title>
+
+<link rel="canonical" href="https://0x0ps.com/projects.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="0x0ps">
+<meta property="og:title" content="Cybersecurity Projects &amp; Research | Davide Vesentini — 0x0ps">
+<meta property="og:description" content="Explore cybersecurity labs, technical experiments, and research interests from Davide Vesentini (null0x), covering offensive security, networking, and AI security.">
+<meta property="og:url" content="https://0x0ps.com/projects.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cybersecurity Projects &amp; Research | Davide Vesentini — 0x0ps">
+<meta name="twitter:description" content="Explore cybersecurity labs, technical experiments, and research interests from Davide Vesentini (null0x), covering offensive security, networking, and AI security.">
 <link rel="stylesheet" href="style.css">
 <style>
 /* PROJECTS PAGE: keep all empty canvas areas pure black, matching Certifications */
@@ -33,6 +43,15 @@ footer {
 .project-index { color: var(--accent); font-size:11px; letter-spacing:.18em; }
 .project-empty-state { min-height: 220px; padding: 28px 0; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
 .project-empty-state p { max-width: 620px; color:var(--muted); font-size:12px; line-height:1.85; }
+
+.featured-work-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;margin-top:24px}
+.featured-work{display:flex;flex-direction:column;gap:14px;padding:26px;background:#050705;border:1px solid var(--border);text-decoration:none;transition:border-color .2s,transform .2s;min-height:230px}
+.featured-work:hover{border-color:var(--accent);transform:translateY(-2px)}
+.featured-work .work-tag{color:var(--accent);font-size:10px;letter-spacing:.16em}
+.featured-work h2{font:700 14px/1.6 'Orbitron',monospace;color:#fff}
+.featured-work p{font-size:12px;line-height:1.85;color:var(--muted)}
+.featured-work .work-link{margin-top:auto;color:var(--accent);font-size:11px;letter-spacing:.12em}
+@media(prefers-reduced-motion:reduce){.featured-work{transition:none}.featured-work:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -68,11 +87,15 @@ footer {
   <header class="page-header">
     <p class="page-eyebrow">02 — Labs / Experiments / Research</p>
     <h1>Projects &amp; <em>Research</em></h1>
-    <p class="projects-intro">Public projects will appear here when I have documented work ready to share. For now, I’m keeping this space clear rather than listing planned labs or research as completed projects.</p>
+    <p class="projects-intro">A selection of documented workstation, infrastructure, and security-learning work. These pages focus on the design decisions, validation steps, and lessons that can be shared publicly.</p>
   </header>
-  <section class="project-empty-state" aria-label="No public projects yet">
-    <span class="project-index">STATUS / NO PUBLIC REPOSITORIES</span>
-    <p>Nothing published yet. Projects will be added when there is a public repository or a documented technical write-up to share.</p>
+  <section aria-label="Featured technical work">
+    <p class="project-index">FEATURED WORK / DOCUMENTED LABS</p>
+    <div class="featured-work-grid">
+      <a class="featured-work" href="notes/kali-linux-i3wm-workstation.html"><span class="work-tag">WORKSTATION // LINUX</span><h2>Kali Linux i3wm Workstation</h2><p>Keyboard-driven desktop configuration, terminal workflows, repeatable window layouts, and maintainable dotfiles.</p><span class="work-link">READ THE TECHNICAL NOTES ↗</span></a>
+      <a class="featured-work" href="notes/proxmox-cybersecurity-home-lab.html"><span class="work-tag">HOMELAB // NETWORKING</span><h2>Proxmox Cybersecurity Home Lab</h2><p>Network separation, virtual bridges, DNS resilience, snapshots, and safe boundaries for hands-on testing.</p><span class="work-link">READ THE DESIGN GUIDE ↗</span></a>
+      <a class="featured-work" href="notes/mcp-security-testing-checklist.html"><span class="work-tag">AI SECURITY // MCP</span><h2>MCP Security Testing Checklist</h2><p>Review tool permissions, trust boundaries, untrusted content, secrets, and authorization failure cases.</p><span class="work-link">OPEN THE CHECKLIST ↗</span></a>
+    </div>
   </section>
 </main>
 <footer>
