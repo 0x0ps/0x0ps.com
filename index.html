@@ -181,64 +181,16 @@
   }
   .profile-badge span { color: var(--accent); }
 
-  /* QUICK LINKS ROW */
-  .quick-links {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border-top: 1px solid var(--border);
-  }
-  .ql {
-    background: var(--bg2);
-    padding: 28px 32px;
-    text-decoration: none;
-    display: flex; flex-direction: column; gap: 8px;
-    transition: background 0.2s;
-    border: none;
-  }
-  .ql:hover { background: var(--bg3); }
-  .ql:hover .ql-label { color: var(--accent); }
-  .ql-num {
-    font-family: 'Orbitron', monospace;
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: var(--border);
-    line-height: 1;
-  }
-  .ql-label {
-    font-family: 'Orbitron', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--white);
-    transition: color 0.2s;
-  }
-  .ql-desc {
-    font-size: 11px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-  .ql-arrow {
-    font-size: 16px;
-    color: var(--muted);
-    margin-top: 8px;
-    transition: color 0.2s, transform 0.2s;
-    display: inline-block;
-  }
-  .ql:hover .ql-arrow { color: var(--accent); transform: translateX(4px); }
-
   @media (max-width: 860px) {
     .hero { grid-template-columns: 1fr; min-height: auto; padding-bottom: 48px; }
     .hero-visual { display: none; }
-    .quick-links { grid-template-columns: 1fr 1fr; }
+
     .hero-text { padding: 48px 20px 32px; }
     h1 { font-size: clamp(2rem, 10vw, 3.5rem); }
     .hero-stats { gap: 24px; }
   }
   @media (max-width: 500px) {
-    .quick-links { grid-template-columns: 1fr; }
+
     .hero-stats .st .n { font-size: 1.4rem; }
   }
 .logo-handle { font-size:10px; color:var(--accent); letter-spacing:0.2em; }
@@ -332,40 +284,6 @@
     </div>
   </div>
 </section>
-
-<!-- QUICK LINKS -->
-<div class="quick-links">
-  <a href="about.html" class="ql">
-    <div class="ql-num">01</div>
-    <div class="ql-label">About</div>
-    <div class="ql-desc">Background, skills, and methodology.</div>
-    <span class="ql-arrow">→</span>
-  </a>
-  <a href="projects.html" class="ql">
-    <div class="ql-num">02</div>
-    <div class="ql-label">Projects</div>
-    <div class="ql-desc">Labs, experiments, and technical research.</div>
-    <span class="ql-arrow">→</span>
-  </a>
-  <a href="certificates.html" class="ql">
-    <div class="ql-num">03</div>
-    <div class="ql-label">Certificates</div>
-    <div class="ql-desc">Earned credentials and certifications.</div>
-    <span class="ql-arrow">→</span>
-  </a>
-  <a href="blog.html" class="ql">
-    <div class="ql-num">04</div>
-    <div class="ql-label">Field Notes</div>
-    <div class="ql-desc">Writeups, research, and field notes.</div>
-    <span class="ql-arrow">→</span>
-  </a>
-  <a href="contact.html" class="ql">
-    <div class="ql-num">05</div>
-    <div class="ql-label">Contact</div>
-    <div class="ql-desc">Book an engagement or get in touch.</div>
-    <span class="ql-arrow">→</span>
-  </a>
-</div>
 
 <footer>
   <div>© 2026 DAVIDE VESENTINI — ALL RIGHTS RESERVED</div>
