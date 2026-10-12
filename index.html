@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DAVIDE VESENTINI — Penetration Tester</title>
+<title>Davide Vesentini | 0x0ps — Offensive Security & AI Security</title>
+<meta name="description" content="Davide Vesentini (null0x): cybersecurity practitioner exploring offensive security, red-team tradecraft, networking, and AI security.">
+<meta name="theme-color" content="#050705">
 <link rel="stylesheet" href="style.css">
 <style>
   /* HOME-SPECIFIC */
@@ -217,6 +219,13 @@
     .quick-links { grid-template-columns: 1fr; }
     .hero-stats .st .n { font-size: 1.4rem; }
   }
+  .logo-handle { font-size: 10px; color: var(--red); letter-spacing: 0.2em; }
+  .hero-handle { font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: 0.3em; color: var(--red); text-transform: uppercase; margin-top: 10px; }
+  .hero-summary { max-width: 560px; color: var(--muted); line-height: 1.85; margin: -22px 0 28px; font-size: 13px; }
+  .profile-img { object-fit: contain; background: #050705; padding: 12px; filter: none; }
+  .hero-stats { gap: clamp(18px, 3vw, 40px); }
+  .st .n { font-size: clamp(1.25rem, 2.3vw, 1.9rem); }
+  @media (max-width: 860px) { .hero-summary { margin-top: -20px; } }
 </style>
 </head>
 <body>
@@ -224,20 +233,31 @@
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="topbar-left">
-    <a href="index.html" class="logo">DAVIDE<span>.</span>VESENTINI <span style="font-size:10px;color:var(--red);letter-spacing:0.2em;">aka null0x</span></a>
-    <span class="status-pill" style="display:block;">● AVAILABLE</span>
+    <a href="index.html" class="logo">DAVIDE<span>.</span>VESENTINI <span class="logo-handle">aka null0x</span></a>
+    <span class="status-pill" style="display:block;">● ACTIVE RESEARCH</span>
   </div>
   <nav>
-    <a href="index.html" class="active" data-short="~">HOME</a>
+    <a href="index.html" class="active" data-short="~" aria-current="page">HOME</a>
     <a href="about.html" data-short="A">ABOUT</a>
+    <a href="projects.html" data-short="P">PROJECTS</a>
     <a href="certificates.html" data-short="C">CERTS</a>
     <a href="blog.html" data-short="B">BLOG</a>
     <a href="contact.html" data-short="@">CONTACT</a>
   </nav>
-  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="mobile-nav" aria-expanded="false" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>
 </header>
+
+<div class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <a href="index.html" class="active" aria-current="page">Home</a>
+  <a href="about.html">About</a>
+  <a href="projects.html">Projects</a>
+  <a href="certificates.html">Certifications</a>
+  <a href="blog.html">Field Notes</a>
+  <a href="contact.html">Contact</a>
+</div>
+
 
 <!-- TICKER -->
 <div class="ticker">
@@ -260,37 +280,32 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-text">
-    <p class="hero-eyebrow fade-up">OFFENSIVE SECURITY // <span>PENETRATION TESTER</span></p>
+    <p class="hero-eyebrow fade-up">OFFENSIVE SECURITY // <span>AI SECURITY</span></p>
     <h1 class="fade-up fade-up-2">DAVIDE <span class="accent">VESENTINI</span></h1>
-    <p style="font-family:'Share Tech Mono',monospace; font-size:13px; letter-spacing:0.3em; color:var(--red); text-transform:uppercase; margin-top:10px;">// aka <strong>null0x</strong></p>
-    <p class="hero-role fade-up fade-up-3">Finding what others miss. Breaking what others trust.</p>
+    <p class="hero-handle">// aka <strong>null0x</strong></p>
+    <p class="hero-role fade-up fade-up-3">Research. Build. Test assumptions — ethically.</p>
+    <p class="hero-summary fade-up fade-up-3">Cybersecurity practitioner focused on offensive security, red-team tradecraft, network engineering, and emerging AI security challenges.</p>
 
-    <div class="hero-stats fade-up fade-up-3">
-      <div class="st"><span class="n">5+</span><span class="l">YEARS EXP</span></div>
-      <div class="st"><span class="n">100+</span><span class="l">TESTS DONE</span></div>
-      <div class="st"><span class="n">CVE</span><span class="l">RESEARCHER</span></div>
+    <div class="hero-stats fade-up fade-up-3" aria-label="Areas of focus">
+      <div class="st"><span class="n">CPTS</span><span class="l">HTB CERTIFIED</span></div>
+      <div class="st"><span class="n">AI</span><span class="l">SECURITY RESEARCH</span></div>
+      <div class="st"><span class="n">LAB</span><span class="l">HANDS-ON BUILDING</span></div>
     </div>
 
     <div class="cta-group fade-up fade-up-4">
-      <a href="contact.html" class="btn">HIRE ME ›</a>
-      <a href="about.html" class="btn btn-ghost">MY PROFILE ›</a>
+      <a href="projects.html" class="btn">EXPLORE PROJECTS ›</a>
+      <a href="about.html" class="btn btn-ghost">ABOUT ME ›</a>
     </div>
   </div>
 
   <div class="hero-visual">
     <div class="profile-frame">
       <div class="profile-img-wrap">
-        <div class="placeholder" style="width:200px;height:200px;">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-            <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-          </svg>
-          <span>YOUR PHOTO</span>
-        </div>
-        <!-- <img src="assets/photo.jpg" alt="Davide Vesentini" class="profile-img"> -->
+        <img src="assets/0x0ps.png" alt="0x0ps cyber emblem" class="profile-img" width="200" height="200">
       </div>
-      <div class="profile-badge">STATUS: <span>AVAILABLE FOR HIRE</span></div>
+      <div class="profile-badge">FOCUS: <span>OFFENSIVE + AI SECURITY</span></div>
       <div style="font-size:10px;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase;">
-        Based in Italy &nbsp;//&nbsp; Remote Worldwide
+        ITALY &nbsp;//&nbsp; HANDS-ON RESEARCH
       </div>
     </div>
   </div>
@@ -304,20 +319,26 @@
     <div class="ql-desc">Background, skills, and methodology.</div>
     <span class="ql-arrow">→</span>
   </a>
-  <a href="certificates.html" class="ql">
+  <a href="projects.html" class="ql">
     <div class="ql-num">02</div>
+    <div class="ql-label">Projects</div>
+    <div class="ql-desc">Labs, experiments, and technical research.</div>
+    <span class="ql-arrow">→</span>
+  </a>
+  <a href="certificates.html" class="ql">
+    <div class="ql-num">03</div>
     <div class="ql-label">Certificates</div>
     <div class="ql-desc">Earned credentials and certifications.</div>
     <span class="ql-arrow">→</span>
   </a>
   <a href="blog.html" class="ql">
-    <div class="ql-num">03</div>
-    <div class="ql-label">Blog</div>
+    <div class="ql-num">04</div>
+    <div class="ql-label">Field Notes</div>
     <div class="ql-desc">Writeups, research, and field notes.</div>
     <span class="ql-arrow">→</span>
   </a>
   <a href="contact.html" class="ql">
-    <div class="ql-num">04</div>
+    <div class="ql-num">05</div>
     <div class="ql-label">Contact</div>
     <div class="ql-desc">Book an engagement or get in touch.</div>
     <span class="ql-arrow">→</span>
@@ -328,8 +349,9 @@
   <div>© 2026 DAVIDE VESENTINI — ALL RIGHTS RESERVED</div>
   <div style="display:flex;gap:24px;">
     <a href="about.html">ABOUT</a>
+    <a href="projects.html">PROJECTS</a>
     <a href="certificates.html">CERTS</a>
-    <a href="blog.html">BLOG</a>
+    <a href="blog.html">FIELD NOTES</a>
     <a href="contact.html">CONTACT</a>
   </div>
   <div class="footer-signal">● SIGNAL ACTIVE</div>
@@ -338,16 +360,22 @@
 
 <script>
 function toggleMenu() {
-  document.getElementById('mobile-nav').classList.toggle('open');
-  document.getElementById('hamburger').classList.toggle('open');
+  const menu = document.getElementById('mobile-nav');
+  const button = document.getElementById('hamburger');
+  if (!menu || !button) return;
+  const open = menu.classList.toggle('open');
+  button.classList.toggle('open', open);
+  button.setAttribute('aria-expanded', String(open));
 }
-// close menu on link click
-document.querySelectorAll('.mobile-nav a').forEach(a => {
-  a.addEventListener('click', () => {
-    document.getElementById('mobile-nav').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
-  });
-});
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  const menu = document.getElementById('mobile-nav');
+  const button = document.getElementById('hamburger');
+  if (menu) menu.classList.remove('open');
+  if (button) {
+    button.classList.remove('open');
+    button.setAttribute('aria-expanded', 'false');
+  }
+}));
 </script>
 
 </body>
