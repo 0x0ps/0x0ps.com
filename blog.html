@@ -337,30 +337,24 @@ alg: none <span class="good">[VULNERABLE]</span>
     <a href="about.html">ABOUT</a>
     <a href="projects.html">PROJECTS</a>
     <a href="certificates.html">CERTS</a>
-    <a href="blog.html">BLOG</a>
+    <a href="blog.html">FIELD NOTES</a>
     <a href="contact.html">CONTACT</a>
   </div>
   <div class="footer-signal">● SIGNAL ACTIVE</div>
 </footer>
 
 <script>
-function toggleMenu() {
-  const menu = document.getElementById('mobile-nav');
-  const button = document.getElementById('hamburger');
-  if (!menu || !button) return;
-  const open = menu.classList.toggle('open');
-  button.classList.toggle('open', open);
-  button.setAttribute('aria-expanded', String(open));
-}
-document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
-  const menu = document.getElementById('mobile-nav');
-  const button = document.getElementById('hamburger');
-  if (menu) menu.classList.remove('open');
-  if (button) {
-    button.classList.remove('open');
-    button.setAttribute('aria-expanded', 'false');
+  function filterPosts(category, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.post-card').forEach(card => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
   }
-}));
 </script>
 
 
