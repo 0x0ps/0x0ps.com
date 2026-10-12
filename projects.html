@@ -8,19 +8,31 @@
 <title>Projects & Research — Davide Vesentini | 0x0ps</title>
 <link rel="stylesheet" href="style.css">
 <style>
+/* PROJECTS PAGE: keep all empty canvas areas pure black, matching Certifications */
+html,
+body {
+  background: #000000 !important;
+  background-image: none !important;
+}
+body::before,
+body::after {
+  display: none !important;
+  background: #000000 !important;
+}
+body > main.page,
+main.page,
+.project-empty-state {
+  background: #000000 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+footer {
+  background: #000000 !important;
+}
 .projects-intro { max-width: 760px; color: var(--muted); line-height: 1.9; margin-top: 22px; }
-.project-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1px; background:var(--border); }
-.project-card { background:var(--bg2); padding:28px; min-height:250px; display:flex; flex-direction:column; gap:14px; border-top:2px solid transparent; transition:background .2s,border-color .2s; }
-.project-card:hover { background:var(--bg3); border-top-color:var(--accent); }
-.project-index { color:var(--accent); font-size:11px; letter-spacing:.18em; }
-.project-card h2 { font-family:'Orbitron',monospace; font-size:14px; line-height:1.5; letter-spacing:.06em; color:var(--white); }
-.project-card p { color:var(--muted); font-size:12px; line-height:1.85; }
-.project-state { align-self:flex-start; border:1px solid var(--border); padding:4px 8px; color:var(--accent); font-size:9px; letter-spacing:.14em; text-transform:uppercase; }
-.project-links { display:flex; flex-wrap:wrap; gap:12px; margin-top:auto; padding-top:8px; }
-.project-links a { color:var(--accent); font-size:11px; text-decoration:none; letter-spacing:.08em; }
-.project-links a:hover { color:var(--white); }
-.project-note { margin-top:34px; padding:20px 24px; border-left:2px solid var(--accent); background:var(--bg2); color:var(--muted); font-size:12px; line-height:1.8; }
-@media(max-width:560px) { .project-grid { grid-template-columns:1fr; } }
+.project-index { color: var(--accent); font-size:11px; letter-spacing:.18em; }
+.project-empty-state { min-height: 220px; padding: 28px 0; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
+.project-empty-state p { max-width: 620px; color:var(--muted); font-size:12px; line-height:1.85; }
 </style>
 </head>
 <body>
@@ -54,46 +66,12 @@
   <header class="page-header">
     <p class="page-eyebrow">02 — Labs / Experiments / Research</p>
     <h1>Projects &amp; <em>Research</em></h1>
-    <p class="projects-intro">A workbench for hands-on learning: lab environments, offensive-security practice, network engineering, and AI security. This page distinguishes ongoing experiments from completed work and links to public artifacts when they are available.</p>
+    <p class="projects-intro">Public projects will appear here when I have documented work ready to share. For now, I’m keeping this space clear rather than listing planned labs or research as completed projects.</p>
   </header>
-  <section class="project-grid" aria-label="Project areas">
-    <article class="project-card">
-      <span class="project-index">PROJECT / 01</span><span class="project-state">Lab build</span>
-      <h2>Proxmox Cyber Range</h2>
-      <p>Building a segmented home lab to explore virtualized security infrastructure, firewalling, monitoring, and realistic attack-and-defend workflows.</p>
-      <div class="skill-tags"><span class="skill-tag">Proxmox VE</span><span class="skill-tag">OPNsense</span><span class="skill-tag">SIEM</span><span class="skill-tag">Network Segmentation</span></div>
-      <div class="project-links"><a href="https://github.com/0x0ps?tab=repositories" target="_blank" rel="noopener noreferrer">Browse repositories ↗</a></div>
-    </article>
-    <article class="project-card">
-      <span class="project-index">PROJECT / 02</span><span class="project-state">Research focus</span>
-      <h2>AI &amp; LLM Security</h2>
-      <p>Exploring AI security concepts, model and application attack surfaces, prompt-injection risks, and security testing for local and open-source LLM workflows.</p>
-      <div class="skill-tags"><span class="skill-tag">LLM Security</span><span class="skill-tag">MCP</span><span class="skill-tag">Threat Modeling</span></div>
-      <div class="project-links"><a href="https://github.com/0x0ps?tab=repositories" target="_blank" rel="noopener noreferrer">Browse repositories ↗</a></div>
-    </article>
-    <article class="project-card">
-      <span class="project-index">PROJECT / 03</span><span class="project-state">Hands-on practice</span>
-      <h2>Offensive Security</h2>
-      <p>Structured practice in web application, network, and Active Directory security, with emphasis on methodology, evidence, impact, and clear technical reporting.</p>
-      <div class="skill-tags"><span class="skill-tag">Pentesting</span><span class="skill-tag">Red Team</span><span class="skill-tag">Reporting</span></div>
-      <div class="project-links"><a href="certificates.html">View earned credentials ↗</a></div>
-    </article>
-    <article class="project-card">
-      <span class="project-index">PROJECT / 04</span><span class="project-state">Learning lab</span>
-      <h2>Network Engineering</h2>
-      <p>Developing practical networking skills through virtual topologies, routing and switching exercises, segmentation, and troubleshooting.</p>
-      <div class="skill-tags"><span class="skill-tag">TCP/IP</span><span class="skill-tag">Routing</span><span class="skill-tag">VLANs</span><span class="skill-tag">EVE-NG</span></div>
-      <div class="project-links"><a href="https://github.com/0x0ps?tab=repositories" target="_blank" rel="noopener noreferrer">Browse repositories ↗</a></div>
-    </article>
-    <article class="project-card">
-      <span class="project-index">PROJECT / 05</span><span class="project-state">Publishing</span>
-      <h2>Technical Field Notes</h2>
-      <p>Documenting lessons learned, reproducible lab notes, and technical explanations as public write-ups become ready for release.</p>
-      <div class="skill-tags"><span class="skill-tag">Write-ups</span><span class="skill-tag">Documentation</span><span class="skill-tag">Knowledge Sharing</span></div>
-      <div class="project-links"><a href="blog.html">Open field notes ↗</a></div>
-    </article>
+  <section class="project-empty-state" aria-label="No public projects yet">
+    <span class="project-index">STATUS / NO PUBLIC REPOSITORIES</span>
+    <p>Nothing published yet. Projects will be added when there is a public repository or a documented technical write-up to share.</p>
   </section>
-  <aside class="project-note">Only authorized labs and systems are used for offensive-security practice. Public project details will be added as they are documented and reviewed for sensitive information.</aside>
 </main>
 <footer>
   <div>© 2026 DAVIDE VESENTINI — ALL RIGHTS RESERVED</div>
