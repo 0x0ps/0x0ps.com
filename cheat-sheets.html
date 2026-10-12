@@ -27,7 +27,6 @@
   .sheet-empty { margin-top:26px; padding:20px 22px; border-left:2px solid var(--accent); background:#000000; color:var(--muted); font-size:11px; line-height:1.9; }
   .logo-handle { font-size:10px; color:var(--accent); letter-spacing:.2em; }
 
-.quick-reference{margin-top:38px}.quick-reference h2{font:700 16px 'Orbitron',monospace;color:#fff;margin-bottom:14px}.quick-reference-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}.quick-reference-card{background:#000;border:1px solid var(--border);padding:20px;min-width:0}.quick-reference-card h3{font:700 12px 'Orbitron',monospace;color:var(--accent);margin-bottom:12px}.quick-reference-card p{font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.8}.quick-reference-card pre{white-space:pre-wrap;overflow-wrap:anywhere;overflow-x:auto;background:#050705;border:1px solid var(--border);padding:14px;font-size:11px;line-height:1.8;color:#d7ffb0}.quick-reference-card code{font-family:'Share Tech Mono',monospace}.quick-note{font-size:11px;line-height:1.8;color:var(--muted);margin-top:18px;border-left:2px solid var(--accent);padding-left:14px}
 </style>
 </head>
 <body>
@@ -58,35 +57,6 @@
     <article class="sheet-card"><div class="sheet-code">[ CS-05 ]</div><h2>RED TEAM TOOLING</h2><p>Operator notes, tool syntax, and workflow reminders for controlled environments.</p><div class="sheet-status">AWAITING FIRST ENTRY</div></article>
     <article class="sheet-card"><div class="sheet-code">[ CS-06 ]</div><h2>AI SECURITY</h2><p>LLM testing, prompt-injection research, MCP security, and local model tooling.</p><div class="sheet-status">AWAITING FIRST ENTRY</div></article>
   </div>
-  <section class="quick-reference" aria-labelledby="quick-reference-title">
-    <h2 id="quick-reference-title">STARTER COMMAND REFERENCE</h2>
-    <div class="quick-reference-grid">
-      <article class="quick-reference-card"><h3>LINUX // SYSTEM &amp; FILES</h3><p>Quick checks for the current host, storage, processes, and listening sockets.</p><pre><code>uname -a
-ip addr
-ip route
-df -h
-ps aux
-ss -tulpn
-journalctl -p warning -b</code></pre></article>
-      <article class="quick-reference-card"><h3>NETWORKING // DNS &amp; ROUTES</h3><p>Inspect name resolution and the path the system expects to use.</p><pre><code>ip route get 1.1.1.1
-resolvectl status
-dig example.com
-dig @1.1.1.1 example.com
-traceroute example.com
-curl -I https://example.com</code></pre></article>
-      <article class="quick-reference-card"><h3>WEB // RESPONSE HEADERS</h3><p>For a site you own or are authorized to assess, inspect the response headers without crawling or changing server state.</p><pre><code>curl -sS -D - -o /dev/null https://example.com
-curl -sS -o /dev/null -w "%{http_code}\n" https://example.com</code></pre></article>
-      <article class="quick-reference-card"><h3>AI SECURITY // TEST NOTES</h3><p>Before testing an AI tool integration, record the scope and expected behavior.</p><pre><code>Target / environment:
-Authorized actions:
-Tools and permissions:
-Sensitive data boundaries:
-Negative tests:
-Expected safe behavior:
-Evidence / observations:
-Cleanup performed:</code></pre></article>
-    </div>
-    <p class="quick-note">// Use these commands only on systems you own or are authorized to assess. Output and available options can vary by distribution and environment.</p>
-  </section>
 </main>
 <footer>
   <div>© 2026 DAVIDE VESENTINI — ALL RIGHTS RESERVED</div>
