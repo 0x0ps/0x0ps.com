@@ -319,30 +319,50 @@
     <a href="about.html">ABOUT</a>
     <a href="projects.html">PROJECTS</a>
     <a href="certificates.html">CERTS</a>
-    <a href="blog.html">BLOG</a>
+    <a href="blog.html">FIELD NOTES</a>
     <a href="contact.html">CONTACT</a>
   </div>
   <div class="footer-signal">● SIGNAL ACTIVE</div>
 </footer>
 
 <script>
-function toggleMenu() {
-  const menu = document.getElementById('mobile-nav');
-  const button = document.getElementById('hamburger');
-  if (!menu || !button) return;
-  const open = menu.classList.toggle('open');
-  button.classList.toggle('open', open);
-  button.setAttribute('aria-expanded', String(open));
-}
-document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
-  const menu = document.getElementById('mobile-nav');
-  const button = document.getElementById('hamburger');
-  if (menu) menu.classList.remove('open');
-  if (button) {
-    button.classList.remove('open');
-    button.setAttribute('aria-expanded', 'false');
+  async function handleSubmit() {
+    const name    = document.getElementById('name').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const subject = document.getElementById('subject').value;
+    const company = document.getElementById('company').value.trim();
+
+    if (!name || !email || !message) {
+      alert('Please fill in Name, Email, and Message.');
+      return;
+    }
+
+    const btn = document.querySelector('.contact-form button');
+    btn.textContent = 'SENDING...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://formspree.io/f/xgonjyel', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, company, subject, message })
+      });
+
+      if (res.ok) {
+        btn.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        btn.textContent = 'SEND TRANSMISSION ›';
+        btn.disabled = false;
+        alert('Transmission failed. Try emailing directly.');
+      }
+    } catch(err) {
+      btn.textContent = 'SEND TRANSMISSION ›';
+      btn.disabled = false;
+      alert('Network error. Try emailing directly.');
+    }
   }
-}));
 </script>
 
 <script>
