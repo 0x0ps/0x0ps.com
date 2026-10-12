@@ -101,7 +101,7 @@ nav a {
   display: flex;
   align-items: center;
   padding: 0 22px;
-  color: #f2f2f2;
+  color: #ffffff;
   text-decoration: none;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -115,7 +115,7 @@ nav a:hover {
   background: var(--bg2);
 }
 nav a.active {
-  color: var(--accent);
+  color: #ffffff;
   background: var(--bg2);
 }
 nav a.active::after {
@@ -232,7 +232,7 @@ footer {
   gap: 12px;
   border-top: 1px solid var(--border);
 }
-footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+footer a { color: #ffffff; text-decoration: none; transition: color 0.2s; }
 footer a:hover { color: var(--accent); }
 .footer-signal { color: var(--accent); animation: blink 1.8s step-end infinite; }
 
@@ -328,7 +328,7 @@ footer a:hover { color: var(--accent); }
 .mobile-nav.open { display: flex; }
 .mobile-nav a {
   padding: 16px 28px;
-  color: #f2f2f2;
+  color: #ffffff;
   text-decoration: none;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -341,7 +341,7 @@ footer a:hover { color: var(--accent); }
 }
 .mobile-nav a::before { content: '//'; color: var(--accent); font-size: 11px; }
 .mobile-nav a:hover  { color: var(--white); background: var(--bg2); }
-.mobile-nav a.active { color: var(--accent); }
+.mobile-nav a.active { color: #ffffff; }
 
 /* ── RESPONSIVE BREAKPOINTS ── */
 @media (max-width: 860px) {
@@ -397,7 +397,7 @@ a, button { cursor: pointer; }
 nav a { padding-left: clamp(9px, 1.15vw, 17px); padding-right: clamp(9px, 1.15vw, 17px); }
 .mobile-nav a { min-height: 48px; }
 .mobile-nav a::before { color: var(--accent); }
-.mobile-nav a.active { color: var(--accent); background: var(--bg2); }
+.mobile-nav a.active { color: #ffffff; background: var(--bg2); }
 .mobile-nav a.active::before { content: '>'; }
 .quick-links { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 @media (max-width: 860px) { .quick-links { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
