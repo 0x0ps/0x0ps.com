@@ -359,6 +359,9 @@ footer a:hover { color: var(--accent); }
   .hamburger { display: flex; }
   .logo { font-size: 12px; letter-spacing: 0.14em; }
   .topbar { padding: 0 16px 0 20px; }
+  /* Prevent the homepage status label from widening the mobile header. */
+  .topbar-left { min-width: 0; }
+  .status-pill { display: none !important; }
 
   /* footer stack */
   footer {
