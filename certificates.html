@@ -115,26 +115,43 @@
   .section-label::before { content: '// '; color: var(--accent); }
 .logo-handle { font-size:10px; color:var(--accent); letter-spacing:0.2em; }
 
-  /* CERTIFICATES PAGE: keep every empty area pure black, including below the final row */
-  html, body {
-    background: #000000;
+  /* CERTIFICATES PAGE: force all empty canvas areas to true black */
+  html,
+  body {
+    background: #000000 !important;
+    background-image: none !important;
   }
+  body::before,
   body::after {
-    background: none;
+    display: none !important;
+    background: #000000 !important;
   }
-  main.page {
-    background: #000000;
+  body > main.page,
+  main.page,
+  .cert-grid {
+    background: #000000 !important;
+    background-image: none !important;
+    box-shadow: none !important;
   }
   .cert-grid {
-    background: #000000;
+    gap: 1px;
+    border: 0;
   }
-  .cert-card,
-  .cert-img-wrap,
-  .cert-info {
-    background-color: #000000;
+  .cert-grid > .cert-card {
+    background: #000000 !important;
+  }
+  .cert-card .cert-img-wrap,
+  .cert-card .cert-info {
+    background: #000000 !important;
   }
   .cert-card:hover {
-    background-color: #050705;
+    background: #050705 !important;
+  }
+  main.page > p:last-child {
+    background: #000000 !important;
+  }
+  footer {
+    background: #000000 !important;
   }
 </style>
 </head>
