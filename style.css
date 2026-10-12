@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap');
 
 :root {
-  --bg:       #060406;
-  --bg2:      #0c080c;
-  --bg3:      #100a10;
-  --red:      #ff2233;
-  --red-dim:  #991122;
-  --red-glow: rgba(255,34,51,0.15);
-  --amber:    #ff8800;
+  --bg:       #050705;
+  --bg2:      #0a0e0a;
+  --bg3:      #101710;
+  --red:      #a7ff32;
+  --red-dim:  #456b1d;
+  --red-glow: rgba(167,255,50,0.14);
+  --amber:    #d5ff70;
   --text:     #f0f0f0;
-  --muted:    #a08888;
-  --border:   #2a1a1a;
+  --muted:    #9aa697;
+  --border:   #263126;
   --white:    #ffffff;
 }
 
@@ -43,7 +43,7 @@ body::before {
 body::after {
   content: '';
   position: fixed; inset: 0;
-  background: radial-gradient(ellipse at center, transparent 50%, rgba(180,0,20,0.08) 100%);
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(70,110,30,0.10) 100%);
   pointer-events: none;
   z-index: 9997;
 }
@@ -59,7 +59,7 @@ body::after {
   color: var(--muted);
   letter-spacing: 0.12em;
   position: sticky; top: 0;
-  background: rgba(6,4,6,0.97);
+  background: rgba(5,7,5,0.97);
   backdrop-filter: blur(8px);
   z-index: 200;
   height: 52px;
@@ -101,7 +101,7 @@ nav a {
   display: flex;
   align-items: center;
   padding: 0 22px;
-  color: #c0a0a0;
+  color: #aab5a4;
   text-decoration: none;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -139,7 +139,7 @@ nav a.active::after {
   animation: ticker 28s linear infinite;
   font-size: 10px;
   letter-spacing: 0.22em;
-  color: #b09090;
+  color: #9aa697;
   text-transform: uppercase;
 }
 .ticker-inner span { margin: 0 36px; }
@@ -318,7 +318,7 @@ footer a:hover { color: var(--red); }
   display: none;
   position: fixed;
   top: 52px; left: 0; right: 0;
-  background: rgba(6,4,6,0.98);
+  background: rgba(5,7,5,0.98);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   z-index: 199;
@@ -380,4 +380,33 @@ footer a:hover { color: var(--red); }
   .logo { font-size: 11px; }
   .page-header h1 { font-size: clamp(1.4rem, 8vw, 2rem); }
   .ticker { display: none; } /* hide ticker on very small screens */
+}
+
+
+/* ── ACCESSIBILITY & TACTICAL GREEN REFINEMENTS ── */
+::selection { background: var(--red); color: #071006; }
+a, button { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 4px;
+}
+body { cursor: default; }
+a, button { cursor: pointer; }
+.topbar { gap: 16px; }
+.topbar nav { flex-shrink: 0; }
+nav a { padding-left: clamp(9px, 1.15vw, 17px); padding-right: clamp(9px, 1.15vw, 17px); }
+.mobile-nav a { min-height: 48px; }
+.mobile-nav a::before { color: var(--red); }
+.mobile-nav a.active { color: var(--red); background: var(--bg2); }
+.mobile-nav a.active::before { content: '>'; }
+.quick-links { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+@media (max-width: 860px) { .quick-links { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 500px) { .quick-links { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
