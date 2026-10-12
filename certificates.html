@@ -114,6 +114,28 @@
   }
   .section-label::before { content: '// '; color: var(--accent); }
 .logo-handle { font-size:10px; color:var(--accent); letter-spacing:0.2em; }
+
+  /* CERTIFICATES PAGE: keep every empty area pure black, including below the final row */
+  html, body {
+    background: #000000;
+  }
+  body::after {
+    background: none;
+  }
+  main.page {
+    background: #000000;
+  }
+  .cert-grid {
+    background: #000000;
+  }
+  .cert-card,
+  .cert-img-wrap,
+  .cert-info {
+    background-color: #000000;
+  }
+  .cert-card:hover {
+    background-color: #050705;
+  }
 </style>
 </head>
 <body>
