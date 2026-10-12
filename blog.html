@@ -3,142 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog — Davide Vesentini</title>
+<meta name="description" content="Field notes from null0x: writeups, technical guides, research, and hands-on lab notes.">
+<title>Field Notes — Davide Vesentini | 0x0ps</title>
 <link rel="stylesheet" href="style.css">
 <style>
-  .filter-bar {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-  }
-  .filter-btn {
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    border: 1px solid var(--border);
-    padding: 6px 16px;
-    color: var(--muted);
-    background: transparent;
-    cursor: pointer;
-    font-family: 'Share Tech Mono', monospace;
-    transition: all 0.2s;
-  }
-  .filter-btn:hover,
-  .filter-btn.active {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .blog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1px;
-    background: var(--border);
-  }
-
-  .post-card {
-    background: var(--bg2);
-    display: flex; flex-direction: column;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-  .post-card:hover { background: var(--bg3); }
-  .post-card:hover .post-title { color: var(--accent); }
-  .post-card:hover .post-img { transform: scale(1.03); }
-
-  .post-img-wrap {
-    width: 100%; aspect-ratio: 16/9;
-    overflow: hidden;
-    background: var(--bg3);
-  }
-  .post-img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    filter: grayscale(30%);
-    transition: transform 0.4s ease;
-    display: block;
-  }
-
-  .post-code-preview {
-    width: 100%; aspect-ratio: 16/9;
-    background: #000;
-    display: flex; align-items: center;
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--border);
-  }
-  .post-code-preview pre {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    line-height: 1.8;
-    letter-spacing: 0.05em;
-    overflow: hidden;
-  }
-  .post-code-preview pre .cmd  { color: var(--accent); }
-  .post-code-preview pre .good { color: var(--accent); }
-
-  .post-meta {
-    padding: 20px 24px 0;
-    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-  }
-  .post-tag {
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    border: 1px solid var(--accent-dim);
-    color: var(--accent);
-    padding: 3px 10px;
-  }
-  .post-date {
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.12em;
-  }
-  .post-read-time {
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    margin-left: auto;
-  }
-
-  .post-body {
-    padding: 14px 24px 28px;
-    flex: 1; display: flex; flex-direction: column; gap: 10px;
-  }
-  .post-title {
-    font-family: 'Orbitron', monospace;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--white);
-    line-height: 1.4;
-    transition: color 0.2s;
-  }
-  .post-excerpt {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.75;
-    flex: 1;
-  }
-  .post-read {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-top: 6px;
-  }
-  @media (max-width: 700px) {
-    .blog-grid { grid-template-columns: 1fr; }
-    .filter-bar { gap: 6px; }
-    .filter-btn { padding: 6px 12px; font-size: 9px; }
-  }
-.logo-handle { font-size:10px; color:var(--accent); letter-spacing:0.2em; }
+  .filter-bar { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px; }
+  .filter-btn { font: 11px 'Share Tech Mono',monospace; letter-spacing:.14em; text-transform:uppercase; border:1px solid var(--border); padding:9px 14px; color:var(--muted); background:transparent; cursor:pointer; }
+  .filter-btn:hover,.filter-btn.active { border-color:var(--accent); color:var(--accent); background:var(--bg2); }
+  .notes-empty { min-height:260px; border:1px solid var(--border); background:var(--bg2); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:42px 24px; }
+  .empty-mark { font-family:'Orbitron',monospace; font-size:34px; color:var(--accent); margin-bottom:18px; }
+  .notes-empty h2 { font-family:'Orbitron',monospace; font-size:15px; color:var(--white); letter-spacing:.08em; margin-bottom:12px; }
+  .notes-empty p { max-width:560px; color:var(--muted); font-size:12px; line-height:1.9; }
+  .category-hint { margin-top:28px; display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); }
+  .category-hint div { background:var(--bg2); padding:15px 18px; }
+  .category-hint strong { display:block; color:var(--accent); font-size:11px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:5px; }
+  .category-hint span { color:var(--muted); font-size:11px; }
+  @media(max-width:600px) { .filter-bar { gap:6px; } .filter-btn { padding:8px 10px; font-size:10px; } }
+  .logo-handle { font-size:10px; color:var(--accent); letter-spacing:.2em; }
 </style>
 </head>
 <body>
-
 <header class="topbar">
   <div class="topbar-left">
     <a href="index.html" class="logo">DAVIDE<span>.</span>VESENTINI <span class="logo-handle">aka null0x</span></a>
@@ -149,234 +33,84 @@
     <a href="projects.html" data-short="P">PROJECTS</a>
     <a href="certificates.html" data-short="C">CERTS</a>
     <a href="blog.html" class="active" data-short="B" aria-current="page">FIELD NOTES</a>
+    <a href="cheat-sheets.html" data-short="S">CHEAT SHEETS</a>
     <a href="contact.html" data-short="@">CONTACT</a>
   </nav>
-  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="mobile-nav" aria-expanded="false" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="mobile-nav" aria-expanded="false" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </header>
-
-<!-- MOBILE NAV -->
-<nav class="mobile-nav" id="mobile-nav">
-  <a href="index.html" >HOME</a>
-  <a href="about.html" >ABOUT</a>
-  <a href="certificates.html" >CERTS</a>
-  <a href="blog.html" class="active">BLOG</a>
-  <a href="contact.html" >CONTACT</a>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="projects.html">PROJECTS</a>
+  <a href="certificates.html">CERTS</a><a href="blog.html" class="active" aria-current="page">FIELD NOTES</a>
+  <a href="cheat-sheets.html">CHEAT SHEETS</a><a href="contact.html">CONTACT</a>
 </nav>
-
-<div class="ticker">
-  <div class="ticker-inner">
-    <span>PENETRATION TESTER</span><span class="sep"> // </span>
-    <span>OFFENSIVE SECURITY</span><span class="sep"> // </span>
-    <span>WEB APP SECURITY</span><span class="sep"> // </span>
-    <span>RED TEAM OPS</span><span class="sep"> // </span>
-    <span>NETWORK SECURITY</span><span class="sep"> // </span>
-    <span>EXPLOIT DEVELOPMENT</span><span class="sep"> // </span>
-    <span>PENETRATION TESTER</span><span class="sep"> // </span>
-    <span>OFFENSIVE SECURITY</span><span class="sep"> // </span>
-    <span>WEB APP SECURITY</span><span class="sep"> // </span>
-    <span>RED TEAM OPS</span><span class="sep"> // </span>
-    <span>NETWORK SECURITY</span><span class="sep"> // </span>
-    <span>EXPLOIT DEVELOPMENT</span><span class="sep"> // </span>
-  </div>
-</div>
-
+<div class="ticker"><div class="ticker-inner">
+  <span>PENETRATION TESTER</span><span class="sep"> // </span><span>OFFENSIVE SECURITY</span><span class="sep"> // </span><span>WEB APP SECURITY</span><span class="sep"> // </span><span>RED TEAM OPS</span><span class="sep"> // </span><span>NETWORK SECURITY</span><span class="sep"> // </span><span>AI SECURITY</span><span class="sep"> // </span>
+  <span>PENETRATION TESTER</span><span class="sep"> // </span><span>OFFENSIVE SECURITY</span><span class="sep"> // </span><span>WEB APP SECURITY</span><span class="sep"> // </span><span>RED TEAM OPS</span><span class="sep"> // </span><span>NETWORK SECURITY</span><span class="sep"> // </span><span>AI SECURITY</span><span class="sep"> // </span>
+</div></div>
 <main class="page">
   <div class="page-header fade-up">
     <p class="page-eyebrow">03 — KNOWLEDGE BASE</p>
-    <h1>BLOG & <em>WRITEUPS</em></h1>
+    <h1>FIELD <em>NOTES</em></h1>
   </div>
-
-  <!-- FILTER BAR -->
-  <div class="filter-bar fade-up fade-up-2">
-    <button class="filter-btn active" onclick="filterPosts('all', this)">ALL</button>
-    <button class="filter-btn" onclick="filterPosts('web-app', this)">WEB APP</button>
-    <button class="filter-btn" onclick="filterPosts('active-directory', this)">ACTIVE DIRECTORY</button>
-    <button class="filter-btn" onclick="filterPosts('ctf', this)">CTF WRITEUP</button>
-    <button class="filter-btn" onclick="filterPosts('network', this)">NETWORK</button>
-    <button class="filter-btn" onclick="filterPosts('research', this)">RESEARCH</button>
+  <p style="color:var(--muted);font-size:12px;line-height:1.9;margin-bottom:24px;max-width:760px;">
+    Practical writeups, research, tutorials, and lessons from hands-on labs. Each published note will be listed under its category and open as a dedicated, readable article page.
+  </p>
+  <div class="filter-bar fade-up fade-up-2" role="group" aria-label="Filter field notes by category">
+    <button class="filter-btn active" data-category="all" onclick="filterNotes('all',this)">ALL NOTES</button>
+    <button class="filter-btn" data-category="writeup" onclick="filterNotes('writeup',this)">WRITEUPS</button>
+    <button class="filter-btn" data-category="tutorial" onclick="filterNotes('tutorial',this)">TUTORIALS</button>
+    <button class="filter-btn" data-category="research" onclick="filterNotes('research',this)">RESEARCH</button>
+    <button class="filter-btn" data-category="lab" onclick="filterNotes('lab',this)">LAB NOTES</button>
+    <button class="filter-btn" data-category="networking" onclick="filterNotes('networking',this)">NETWORKING</button>
   </div>
-
-  <div class="blog-grid fade-up fade-up-3" id="blog-grid">
-
-    <!-- POST 1 — duplicate .post-card blocks to add articles -->
-    <a href="#" class="post-card" data-category="web-app">
-      <div class="post-code-preview">
-        <pre><span class="cmd">$ sqlmap -u "target/login" --dbs</span>
-available databases:
-<span class="good">[+]</span> information_schema
-<span class="good">[+]</span> production_db
-<span class="cmd">$ dump --table users</span>
-<span class="good">[+]</span> 4821 entries extracted</pre>
-      </div>
-      <div class="post-meta">
-        <span class="post-tag">Web App</span>
-        <span class="post-date">2026-01-15</span>
-        <span class="post-read-time">8 MIN READ</span>
-      </div>
-      <div class="post-body">
-        <div class="post-title">SQL Injection to Full Database Compromise</div>
-        <div class="post-excerpt">A walkthrough of a real-world engagement where a seemingly minor SQLi vulnerability led to complete database exfiltration and lateral movement.</div>
-        <div class="post-read">READ MORE</div>
-      </div>
-    </a>
-
-    <!-- POST 2 -->
-    <a href="#" class="post-card" data-category="active-directory">
-      <div class="post-code-preview">
-        <pre><span class="cmd">$ GetUserSPNs.py corp/user</span>
-ServicePrincipalName: HTTP/app
-<span class="cmd">$ hashcat -m 13100 hash.txt</span>
-<span class="good">[+]</span> P@ssw0rd123 CRACKED
-<span class="cmd">$ psexec.py admin@dc01</span></pre>
-      </div>
-      <div class="post-meta">
-        <span class="post-tag">Active Directory</span>
-        <span class="post-date">2025-12-03</span>
-        <span class="post-read-time">12 MIN READ</span>
-      </div>
-      <div class="post-body">
-        <div class="post-title">AD Privilege Escalation via Kerberoasting</div>
-        <div class="post-excerpt">How I escalated from a low-privilege domain user to Domain Admin in under 4 hours using Kerberoasting and misconfigured service accounts.</div>
-        <div class="post-read">READ MORE</div>
-      </div>
-    </a>
-
-    <!-- POST 3 -->
-    <a href="#" class="post-card" data-category="ctf">
-      <div class="post-code-preview">
-        <pre><span class="cmd">$ python3 exploit.py --target htb</span>
-[*] Sending payload...
-[*] WAF bypass: <span class="good">SUCCESS</span>
-<span class="cmd">$ nc -lvnp 4444</span>
-<span class="good">[+]</span> Connection received
-<span class="good">[+]</span> whoami: root</pre>
-      </div>
-      <div class="post-meta">
-        <span class="post-tag">CTF Writeup</span>
-        <span class="post-date">2025-10-22</span>
-        <span class="post-read-time">10 MIN READ</span>
-      </div>
-      <div class="post-body">
-        <div class="post-title">HackTheBox — Machine Writeup: Fortress</div>
-        <div class="post-excerpt">Full walkthrough of the Fortress machine — initial foothold through API key leakage, privilege escalation via SUID binary exploitation.</div>
-        <div class="post-read">READ MORE</div>
-      </div>
-    </a>
-
-    <!-- POST 4 -->
-    <a href="#" class="post-card" data-category="network">
-      <div class="post-code-preview">
-        <pre><span class="cmd">$ nmap -sV --script vuln 10.0.0.0/24</span>
-[*] Scanning 254 hosts...
-<span class="good">[+]</span> 10.0.0.12: EternalBlue
-<span class="good">[+]</span> 10.0.0.47: MS17-010
-<span class="cmd">$ use exploit/ms17_010_eternalblue</span></pre>
-      </div>
-      <div class="post-meta">
-        <span class="post-tag">Network</span>
-        <span class="post-date">2025-09-11</span>
-        <span class="post-read-time">9 MIN READ</span>
-      </div>
-      <div class="post-body">
-        <div class="post-title">Internal Network Assessment: From Zero to Domain</div>
-        <div class="post-excerpt">Internal pentest methodology from initial reconnaissance to full domain compromise, including legacy system exploitation and credential harvesting.</div>
-        <div class="post-read">READ MORE</div>
-      </div>
-    </a>
-
-    <!-- POST 5 -->
-    <a href="#" class="post-card" data-category="research">
-      <div class="post-code-preview">
-        <pre><span class="cmd">$ burpsuite --intercept on</span>
-[*] Analyzing JWT tokens...
-alg: none <span class="good">[VULNERABLE]</span>
-<span class="cmd">$ forge-token --alg none --role admin</span>
-<span class="good">[+]</span> Access granted: admin panel</pre>
-      </div>
-      <div class="post-meta">
-        <span class="post-tag">Research</span>
-        <span class="post-date">2025-07-30</span>
-        <span class="post-read-time">15 MIN READ</span>
-      </div>
-      <div class="post-body">
-        <div class="post-title">JWT Algorithm Confusion Attacks in the Wild</div>
-        <div class="post-excerpt">Deep dive into JWT vulnerabilities found across multiple bug bounty targets — algorithm confusion, weak secrets, and the "none" algorithm bypass.</div>
-        <div class="post-read">READ MORE</div>
-      </div>
-    </a>
-
-    <!-- POST 6 -->
-    <a href="#" class="post-card" data-category="web-app">
-      <div class="post-code-preview">
-        <pre><span class="cmd">$ ffuf -w wordlist -u /FUZZ</span>
-<span class="good">[+]</span> /.git/config  [200]
-<span class="good">[+]</span> /api/v1/admin [403]
-<span class="cmd">$ gitdumper.sh target/.git</span>
-<span class="good">[+]</span> Source code recovered</pre>
-      </div>
-      <div class="post-meta">
-        <span class="post-tag">Web App</span>
-        <span class="post-date">2025-06-14</span>
-        <span class="post-read-time">7 MIN READ</span>
-      </div>
-      <div class="post-body">
-        <div class="post-title">Exposed .git Directory to Source Code Theft</div>
-        <div class="post-excerpt">How a misconfigured web server exposing a .git directory led to full source code exfiltration and discovery of hardcoded credentials.</div>
-        <div class="post-read">READ MORE</div>
-      </div>
-    </a>
-
+  <section class="notes-empty fade-up fade-up-3" id="notes-empty" aria-live="polite">
+    <div class="empty-mark">[ 0x0 ]</div>
+    <h2 id="empty-title">NO FIELD NOTES PUBLISHED</h2>
+    <p id="empty-description">The knowledge base is ready. When a note is published, it will appear here with a category, a short summary, and a link to its own article page.</p>
+  </section>
+  <!-- Add each real article as a .note-card here when ready. Link to its own page, e.g. notes/my-writeup.html, and set data-category to writeup, tutorial, research, lab, or networking. -->
+  <div class="category-hint" aria-label="Field note categories">
+    <div><strong>Writeups</strong><span>CTF and machine walkthroughs</span></div>
+    <div><strong>Tutorials</strong><span>Step-by-step technical guides</span></div>
+    <div><strong>Research</strong><span>Experiments and security findings</span></div>
+    <div><strong>Lab Notes</strong><span>Homelab builds and lessons learned</span></div>
+    <div><strong>Networking</strong><span>Infrastructure, protocols, and tooling</span></div>
   </div>
 </main>
-
 <footer>
   <div>© 2026 DAVIDE VESENTINI — ALL RIGHTS RESERVED</div>
-  <div style="display:flex;gap:24px;">
-    <a href="about.html">ABOUT</a>
-    <a href="projects.html">PROJECTS</a>
-    <a href="certificates.html">CERTS</a>
-    <a href="blog.html">FIELD NOTES</a>
-    <a href="contact.html">CONTACT</a>
+  <div style="display:flex;gap:18px;flex-wrap:wrap;">
+    <a href="about.html">ABOUT</a><a href="projects.html">PROJECTS</a><a href="certificates.html">CERTS</a>
+    <a href="blog.html">FIELD NOTES</a><a href="cheat-sheets.html">CHEAT SHEETS</a><a href="contact.html">CONTACT</a>
   </div>
   <div class="footer-signal">● SIGNAL ACTIVE</div>
 </footer>
-
 <script>
-  function filterPosts(category, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.post-card').forEach(card => {
-      if (category === 'all' || card.dataset.category === category) {
-        card.style.display = 'flex';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  }
-</script>
-
-
-<script>
-function toggleMenu() {
-  const menu = document.getElementById('mobile-nav');
-  const button = document.getElementById('hamburger');
-  if (!menu || !button) return;
-  const open = menu.classList.toggle('open');
-  button.classList.toggle('open', open);
-  button.setAttribute('aria-expanded', String(open));
+function filterNotes(category, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = [...document.querySelectorAll('.note-card')];
+  let shown = 0;
+  cards.forEach(card => {
+    const match = category === 'all' || card.dataset.category === category;
+    card.hidden = !match;
+    if (match) shown++;
+  });
+  const empty = document.getElementById('notes-empty');
+  empty.style.display = shown ? 'none' : 'flex';
+  const labels = {all:'FIELD NOTES',writeup:'WRITEUPS',tutorial:'TUTORIALS',research:'RESEARCH',lab:'LAB NOTES',networking:'NETWORKING'};
+  document.getElementById('empty-title').textContent = shown ? '' : 'NO ' + labels[category] + ' PUBLISHED';
+  document.getElementById('empty-description').textContent = shown ? '' : 'There are no notes in this category yet. New articles will appear here when they are ready to publish.';
 }
-document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
-  const menu = document.getElementById('mobile-nav');
-  const button = document.getElementById('hamburger');
-  if (menu) menu.classList.remove('open');
-  if (button) {
-    button.classList.remove('open');
-    button.setAttribute('aria-expanded', 'false');
-  }
+function toggleMenu() {
+  const menu=document.getElementById('mobile-nav'), button=document.getElementById('hamburger');
+  if(!menu||!button)return;
+  const open=menu.classList.toggle('open'); button.classList.toggle('open',open); button.setAttribute('aria-expanded',String(open));
+}
+document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>{
+  const menu=document.getElementById('mobile-nav'),button=document.getElementById('hamburger');
+  if(menu)menu.classList.remove('open'); if(button){button.classList.remove('open');button.setAttribute('aria-expanded','false');}
 }));
 </script>
-
 </body>
 </html>
