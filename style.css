@@ -15,8 +15,11 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; width: 100%; max-width: 100%; overflow-x: hidden; overscroll-behavior-x: none; }
-body { width: 100%; max-width: 100%; overflow-x: hidden; overscroll-behavior-x: none; touch-action: pan-y pinch-zoom; }
+html { scroll-behavior: smooth; width: 100%; max-width: 100%; overflow-x: clip; overscroll-behavior-x: none; }
+body { position: relative; width: 100%; max-width: 100%; overflow-x: clip; overscroll-behavior-x: none; touch-action: pan-y pinch-zoom; }
+@media (max-width: 768px) {
+  html, body { width: 100%; max-width: 100%; overflow-x: clip !important; overscroll-behavior-x: none !important; }
+}
 
 body {
   background: var(--bg);
