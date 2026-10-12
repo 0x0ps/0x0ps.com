@@ -8,8 +8,8 @@
   --accent-dim:  #6f9f31;
   --accent-glow: rgba(167,255,50,0.18);
   --amber:    #d5ff70;
-  --text:     #f5f7f4;
-  --muted:    #c4cec0;
+  --text:     #ffffff;
+  --muted:    #eeeeee;
   --border:   #344034;
   --white:    #ffffff;
 }
@@ -101,7 +101,7 @@ nav a {
   display: flex;
   align-items: center;
   padding: 0 22px;
-  color: #d2dbcf;
+  color: #f2f2f2;
   text-decoration: none;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -139,7 +139,7 @@ nav a.active::after {
   animation: ticker 28s linear infinite;
   font-size: 10px;
   letter-spacing: 0.22em;
-  color: #c4cec0;
+  color: #eeeeee;
   text-transform: uppercase;
 }
 .ticker-inner span { margin: 0 36px; }
@@ -328,7 +328,7 @@ footer a:hover { color: var(--accent); }
 .mobile-nav.open { display: flex; }
 .mobile-nav a {
   padding: 16px 28px;
-  color: #d2dbcf;
+  color: #f2f2f2;
   text-decoration: none;
   letter-spacing: 0.2em;
   text-transform: uppercase;
