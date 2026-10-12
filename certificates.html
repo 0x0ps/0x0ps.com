@@ -249,30 +249,23 @@
     <a href="about.html">ABOUT</a>
     <a href="projects.html">PROJECTS</a>
     <a href="certificates.html">CERTS</a>
-    <a href="blog.html">BLOG</a>
+    <a href="blog.html">FIELD NOTES</a>
     <a href="contact.html">CONTACT</a>
   </div>
   <div class="footer-signal">● SIGNAL ACTIVE</div>
 </footer>
 
 <script>
-function toggleMenu() {
-  const menu = document.getElementById('mobile-nav');
-  const button = document.getElementById('hamburger');
-  if (!menu || !button) return;
-  const open = menu.classList.toggle('open');
-  button.classList.toggle('open', open);
-  button.setAttribute('aria-expanded', String(open));
-}
-document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
-  const menu = document.getElementById('mobile-nav');
-  const button = document.getElementById('hamburger');
-  if (menu) menu.classList.remove('open');
-  if (button) {
-    button.classList.remove('open');
-    button.setAttribute('aria-expanded', 'false');
+  function openLightbox(card) {
+    const img = card.querySelector('img');
+    if (!img) return; // no image yet, only placeholder
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox').classList.add('open');
   }
-}));
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 </script>
 
 
