@@ -105,22 +105,24 @@
     margin-bottom: 20px;
   }
   .section-label::before { content: '// '; color: var(--red); }
+.logo-handle { font-size:10px; color:var(--red); letter-spacing:0.2em; }
 </style>
 </head>
 <body>
 
 <header class="topbar">
   <div class="topbar-left">
-    <a href="index.html" class="logo">DAVIDE<span>.</span>VESENTINI <span style="font-size:10px;color:var(--red);letter-spacing:0.2em;">aka null0x</span></a>
+    <a href="index.html" class="logo">DAVIDE<span>.</span>VESENTINI <span class="logo-handle">aka null0x</span></a>
   </div>
   <nav>
     <a href="index.html" data-short="~">HOME</a>
     <a href="about.html" data-short="A">ABOUT</a>
-    <a href="certificates.html" class="active" data-short="C">CERTS</a>
-    <a href="blog.html" data-short="B">BLOG</a>
+    <a href="projects.html" data-short="P">PROJECTS</a>
+    <a href="certificates.html" class="active" data-short="C" aria-current="page">CERTS</a>
+    <a href="blog.html" data-short="B">FIELD NOTES</a>
     <a href="contact.html" data-short="@">CONTACT</a>
   </nav>
-  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="mobile-nav" aria-expanded="false" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>
 </header>
@@ -245,8 +247,9 @@
   <div>© 2026 DAVIDE VESENTINI — ALL RIGHTS RESERVED</div>
   <div style="display:flex;gap:24px;">
     <a href="about.html">ABOUT</a>
+    <a href="projects.html">PROJECTS</a>
     <a href="certificates.html">CERTS</a>
-    <a href="blog.html">BLOG</a>
+    <a href="blog.html">FIELD NOTES</a>
     <a href="contact.html">CONTACT</a>
   </div>
   <div class="footer-signal">● SIGNAL ACTIVE</div>
@@ -268,16 +271,22 @@
 
 <script>
 function toggleMenu() {
-  document.getElementById('mobile-nav').classList.toggle('open');
-  document.getElementById('hamburger').classList.toggle('open');
+  const menu = document.getElementById('mobile-nav');
+  const button = document.getElementById('hamburger');
+  if (!menu || !button) return;
+  const open = menu.classList.toggle('open');
+  button.classList.toggle('open', open);
+  button.setAttribute('aria-expanded', String(open));
 }
-// close menu on link click
-document.querySelectorAll('.mobile-nav a').forEach(a => {
-  a.addEventListener('click', () => {
-    document.getElementById('mobile-nav').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
-  });
-});
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  const menu = document.getElementById('mobile-nav');
+  const button = document.getElementById('hamburger');
+  if (menu) menu.classList.remove('open');
+  if (button) {
+    button.classList.remove('open');
+    button.setAttribute('aria-expanded', 'false');
+  }
+}));
 </script>
 
 </body>
