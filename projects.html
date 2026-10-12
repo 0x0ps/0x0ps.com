@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Selected labs, experiments, and research interests by Davide Vesentini (null0x).">
+<meta name="theme-color" content="#050705">
+<title>Projects & Research — Davide Vesentini | 0x0ps</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.projects-intro { max-width: 760px; color: var(--muted); line-height: 1.9; margin-top: 22px; }
+.project-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1px; background:var(--border); }
+.project-card { background:var(--bg2); padding:28px; min-height:250px; display:flex; flex-direction:column; gap:14px; border-top:2px solid transparent; transition:background .2s,border-color .2s; }
+.project-card:hover { background:var(--bg3); border-top-color:var(--red); }
+.project-index { color:var(--red); font-size:11px; letter-spacing:.18em; }
+.project-card h2 { font-family:'Orbitron',monospace; font-size:14px; line-height:1.5; letter-spacing:.06em; color:var(--white); }
+.project-card p { color:var(--muted); font-size:12px; line-height:1.85; }
+.project-state { align-self:flex-start; border:1px solid var(--border); padding:4px 8px; color:var(--red); font-size:9px; letter-spacing:.14em; text-transform:uppercase; }
+.project-links { display:flex; flex-wrap:wrap; gap:12px; margin-top:auto; padding-top:8px; }
+.project-links a { color:var(--red); font-size:11px; text-decoration:none; letter-spacing:.08em; }
+.project-links a:hover { color:var(--white); }
+.project-note { margin-top:34px; padding:20px 24px; border-left:2px solid var(--red); background:var(--bg2); color:var(--muted); font-size:12px; line-height:1.8; }
+@media(max-width:560px) { .project-grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-left"><a href="index.html" class="logo">DAVIDE<span>.</span>VESENTINI <span class="logo-handle">aka null0x</span></a></div>
+  <nav>
+    <a href="index.html" data-short="~">HOME</a>
+    <a href="about.html" data-short="A">ABOUT</a>
+    <a href="projects.html" class="active" data-short="P" aria-current="page">PROJECTS</a>
+    <a href="certificates.html" data-short="C">CERTS</a>
+    <a href="blog.html" data-short="B">FIELD NOTES</a>
+    <a href="contact.html" data-short="@">CONTACT</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="mobile-nav" aria-expanded="false" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</header>
+
+<div class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="projects.html" class="active" aria-current="page">Projects</a>
+  <a href="certificates.html">Certifications</a>
+  <a href="blog.html">Field Notes</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="ticker"><div class="ticker-inner">
+<span>HANDS-ON LABS</span><span class="sep">//</span><span>OFFENSIVE SECURITY</span><span class="sep">//</span><span>AI SECURITY</span><span class="sep">//</span><span>NETWORK ENGINEERING</span><span class="sep">//</span>
+<span>HANDS-ON LABS</span><span class="sep">//</span><span>OFFENSIVE SECURITY</span><span class="sep">//</span><span>AI SECURITY</span><span class="sep">//</span><span>NETWORK ENGINEERING</span><span class="sep">//</span>
+</div></div>
+<main class="page">
+  <header class="page-header">
+    <p class="page-eyebrow">02 — Labs / Experiments / Research</p>
+    <h1>Projects &amp; <em>Research</em></h1>
+    <p class="projects-intro">A workbench for hands-on learning: lab environments, offensive-security practice, network engineering, and AI security. This page distinguishes ongoing experiments from completed work and links to public artifacts when they are available.</p>
+  </header>
+  <section class="project-grid" aria-label="Project areas">
+    <article class="project-card">
+      <span class="project-index">PROJECT / 01</span><span class="project-state">Lab build</span>
+      <h2>Proxmox Cyber Range</h2>
+      <p>Building a segmented home lab to explore virtualized security infrastructure, firewalling, monitoring, and realistic attack-and-defend workflows.</p>
+      <div class="skill-tags"><span class="skill-tag">Proxmox VE</span><span class="skill-tag">OPNsense</span><span class="skill-tag">SIEM</span><span class="skill-tag">Network Segmentation</span></div>
+      <div class="project-links"><a href="https://github.com/0x0ps?tab=repositories" target="_blank" rel="noopener noreferrer">Browse repositories ↗</a></div>
+    </article>
+    <article class="project-card">
+      <span class="project-index">PROJECT / 02</span><span class="project-state">Research focus</span>
+      <h2>AI &amp; LLM Security</h2>
+      <p>Exploring AI security concepts, model and application attack surfaces, prompt-injection risks, and security testing for local and open-source LLM workflows.</p>
+      <div class="skill-tags"><span class="skill-tag">LLM Security</span><span class="skill-tag">MCP</span><span class="skill-tag">Threat Modeling</span></div>
+      <div class="project-links"><a href="https://github.com/0x0ps?tab=repositories" target="_blank" rel="noopener noreferrer">Browse repositories ↗</a></div>
+    </article>
+    <article class="project-card">
+      <span class="project-index">PROJECT / 03</span><span class="project-state">Hands-on practice</span>
+      <h2>Offensive Security</h2>
+      <p>Structured practice in web application, network, and Active Directory security, with emphasis on methodology, evidence, impact, and clear technical reporting.</p>
+      <div class="skill-tags"><span class="skill-tag">Pentesting</span><span class="skill-tag">Red Team</span><span class="skill-tag">Reporting</span></div>
+      <div class="project-links"><a href="certificates.html">View earned credentials ↗</a></div>
+    </article>
+    <article class="project-card">
+      <span class="project-index">PROJECT / 04</span><span class="project-state">Learning lab</span>
+      <h2>Network Engineering</h2>
+      <p>Developing practical networking skills through virtual topologies, routing and switching exercises, segmentation, and troubleshooting.</p>
+      <div class="skill-tags"><span class="skill-tag">TCP/IP</span><span class="skill-tag">Routing</span><span class="skill-tag">VLANs</span><span class="skill-tag">EVE-NG</span></div>
+      <div class="project-links"><a href="https://github.com/0x0ps?tab=repositories" target="_blank" rel="noopener noreferrer">Browse repositories ↗</a></div>
+    </article>
+    <article class="project-card">
+      <span class="project-index">PROJECT / 05</span><span class="project-state">Publishing</span>
+      <h2>Technical Field Notes</h2>
+      <p>Documenting lessons learned, reproducible lab notes, and technical explanations as public write-ups become ready for release.</p>
+      <div class="skill-tags"><span class="skill-tag">Write-ups</span><span class="skill-tag">Documentation</span><span class="skill-tag">Knowledge Sharing</span></div>
+      <div class="project-links"><a href="blog.html">Open field notes ↗</a></div>
+    </article>
+  </section>
+  <aside class="project-note">Only authorized labs and systems are used for offensive-security practice. Public project details will be added as they are documented and reviewed for sensitive information.</aside>
+</main>
+<footer>
+  <div>© 2026 DAVIDE VESENTINI — ALL RIGHTS RESERVED</div>
+  <div style="display:flex;gap:18px;flex-wrap:wrap;"><a href="about.html">ABOUT</a><a href="projects.html">PROJECTS</a><a href="certificates.html">CERTS</a><a href="blog.html">FIELD NOTES</a><a href="contact.html">CONTACT</a></div>
+  <div class="footer-signal">● RESEARCH ACTIVE</div>
+</footer>
+<script>
+function toggleMenu() {
+  const menu = document.getElementById('mobile-nav');
+  const button = document.getElementById('hamburger');
+  const open = menu.classList.toggle('open');
+  button.classList.toggle('open', open);
+  button.setAttribute('aria-expanded', String(open));
+}
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  document.getElementById('mobile-nav').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+}));
+</script>
+</body>
+</html>
