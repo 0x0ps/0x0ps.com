@@ -22,7 +22,7 @@
 .sheet-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .sheet-meta span{border:1px solid var(--border);padding:5px 9px;color:var(--accent);font-size:10px;letter-spacing:.1em}
 .notice{border-left:3px solid var(--accent);background:#0a0e0a;padding:14px 16px;color:#fff;font-size:12px;line-height:1.85;margin:22px 0 34px}
-.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px}
+.section-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 20px}.search-wrap{display:flex;align-items:center;gap:8px;flex:1;min-width:220px;border:1px solid var(--border);padding:7px 10px;color:var(--accent)}.search-wrap input{width:100%;min-width:0;background:transparent;border:0;outline:0;color:#fff;font:12px monospace}.search-count{font-size:10px;color:#ddd}.filtered-out{display:none!important}.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px}
 .toc a{border:1px solid var(--border);padding:8px 11px;color:#fff;text-decoration:none;font-size:11px}
 .toc a:hover{border-color:var(--accent);color:var(--accent)}
 .sheet-section{margin:38px 0}
@@ -67,6 +67,7 @@
   <div class="sheet-meta"><span>BLOODYAD</span><span>IMPACKET</span><span>LDAP</span><span>KALI LINUX</span></div>
 </header>
 <div class="notice"><strong>Scope & safety:</strong> Use only against domains you are explicitly authorized to assess. Enumeration commands are separated from high-impact actions. Password changes, account changes, ACL edits, delegation changes, and credential dumping can disrupt systems or expose secrets; do not run them in production without written approval and a rollback plan. Do not publish real credentials or raw credential dumps.</div>
+<div class="section-actions"><button class="copy-btn" type="button" id="copy-all-commands"><span>▣ Copy all commands</span></button><label class="search-wrap"><span>⌕</span><input id="command-search" type="search" placeholder="Filter commands or notes…" aria-label="Filter commands or notes"></label><span id="search-count" class="search-count" aria-live="polite"></span></div>
 <nav class="toc" aria-label="On this page">
 <a href="#setup">Setup</a><a href="#enumeration">Enumeration</a><a href="#ldap">LDAP & attributes</a><a href="#kerberos">Kerberos</a><a href="#privileges">Privilege paths</a><a href="#high-impact">High-impact operations</a><a href="#defense">Detection & hardening</a>
 </nav>
@@ -130,6 +131,13 @@ export USER='audituser'</code><p class="command-note">Avoid exporting or hardcod
 function toggleMenu(){const menu=document.getElementById('mobile-nav'),button=document.getElementById('hamburger');if(!menu||!button)return;const open=menu.classList.toggle('open');button.classList.toggle('open',open);button.setAttribute('aria-expanded',String(open));}
 document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>{const menu=document.getElementById('mobile-nav'),button=document.getElementById('hamburger');if(menu)menu.classList.remove('open');if(button){button.classList.remove('open');button.setAttribute('aria-expanded','false');}}));
 const copyStatus=document.getElementById('copy-status');
+const searchInput=document.getElementById('command-search');
+const searchCount=document.getElementById('search-count');
+function filterCommands(){const q=(searchInput.value||'').trim().toLowerCase();let shown=0;document.querySelectorAll('.sheet-section').forEach(section=>{let matched=0;section.querySelectorAll('.command-card').forEach(card=>{const text=card.innerText.toLowerCase()+' '+(card.querySelector('[data-copy]')?.getAttribute('data-copy')||'').toLowerCase();const ok=!q||text.includes(q);card.classList.toggle('filtered-out',!ok);if(ok){shown++;matched++;}});const has=section.querySelectorAll('.command-card').length>0;section.classList.toggle('filtered-out',has&&matched===0);});searchCount.textContent=q?shown+' matching commands':document.querySelectorAll('.command-card').length+' commands';}
+if(searchInput){searchInput.addEventListener('input',filterCommands);filterCommands();}
+async function copyText(text){try{await navigator.clipboard.writeText(text);return true;}catch(e){const area=document.createElement('textarea');area.value=text;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();const ok=document.execCommand('copy');area.remove();return ok;}}
+const copyAll=document.getElementById('copy-all-commands');
+if(copyAll)copyAll.addEventListener('click',async()=>{const commands=[...document.querySelectorAll('.command-card:not(.filtered-out) [data-copy]')].map(b=>b.getAttribute('data-copy')).filter(Boolean);const ok=commands.length>0&&await copyText(commands.join('\n\n'));copyStatus.textContent=ok?'Copied '+commands.length+' commands':'Copy failed — no commands copied';copyStatus.classList.add('show');window.setTimeout(()=>copyStatus.classList.remove('show'),2200);});
 document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{const text=button.getAttribute('data-copy')||'';try{await navigator.clipboard.writeText(text);}catch(error){const area=document.createElement('textarea');area.value=text;area.setAttribute('readonly','');area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();const ok=document.execCommand('copy');area.remove();if(!ok){copyStatus.textContent='Copy failed — select the command manually';copyStatus.classList.add('show');window.setTimeout(()=>copyStatus.classList.remove('show'),2200);return;}}copyStatus.textContent='Command copied to clipboard';copyStatus.classList.add('show');button.querySelector('span').textContent='Copied';window.setTimeout(()=>{copyStatus.classList.remove('show');button.querySelector('span').textContent='Copy';},1600);}));
 </script>
 </body>
