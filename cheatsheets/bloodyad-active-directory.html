@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BloodyAD Active Directory pentesting cheat sheet: LDAP enumeration, group membership, Kerberos exposure checks, LAPS, ACL auditing, and defensive notes.">
+<meta name="theme-color" content="#050705">
+<title>Active Directory & BloodyAD Cheat Sheet | 0x0ps</title>
+<link rel="canonical" href="https://0x0ps.com/cheatsheets/bloodyad-active-directory.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="0x0ps">
+<meta property="og:title" content="Active Directory & BloodyAD Cheat Sheet | 0x0ps">
+<meta property="og:description" content="Copy-friendly BloodyAD and Impacket command reference for authorized Active Directory assessments.">
+<meta property="og:url" content="https://0x0ps.com/cheatsheets/bloodyad-active-directory.html">
+<link rel="stylesheet" href="../style.css">
+<style>
+.sheet-page{max-width:1100px;margin:0 auto;padding:clamp(32px,6vw,72px) clamp(18px,4vw,40px) 64px;width:100%;flex:1}
+.sheet-head{border-bottom:1px solid var(--border);padding-bottom:28px;margin-bottom:30px}
+.sheet-head h1{font:900 clamp(1.65rem,4.5vw,3rem)/1.1 'Orbitron',monospace;color:#fff;margin:10px 0 14px}
+.sheet-head h1 em{font-style:normal;color:var(--accent)}
+.sheet-intro{color:#fff;max-width:780px;font-size:13px;line-height:1.9}
+.sheet-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.sheet-meta span{border:1px solid var(--border);padding:5px 9px;color:var(--accent);font-size:10px;letter-spacing:.1em}
+.notice{border-left:3px solid var(--accent);background:#0a0e0a;padding:14px 16px;color:#fff;font-size:12px;line-height:1.85;margin:22px 0 34px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px}
+.toc a{border:1px solid var(--border);padding:8px 11px;color:#fff;text-decoration:none;font-size:11px}
+.toc a:hover{border-color:var(--accent);color:var(--accent)}
+.sheet-section{margin:38px 0}
+.sheet-section h2{font:700 clamp(1.05rem,2.5vw,1.35rem) 'Orbitron',monospace;color:var(--accent);margin-bottom:8px}
+.section-desc{font-size:12px;color:#eee;line-height:1.8;margin-bottom:16px}
+.command-card{border:1px solid var(--border);background:#030503;margin:14px 0 18px;min-width:0}
+.command-title{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 13px;border-bottom:1px solid #263126;background:#080b08}
+.command-title strong{font-size:11px;color:#fff;letter-spacing:.04em}
+.copy-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;flex-shrink:0;min-height:34px;padding:6px 10px;border:1px solid var(--accent);background:transparent;color:var(--accent);font:11px 'Share Tech Mono',monospace;cursor:pointer}
+.copy-btn:hover,.copy-btn:focus-visible{background:var(--accent);color:#050705}
+.copy-btn svg{width:15px;height:15px;display:block}
+.command-code{display:block;overflow-x:auto;padding:16px;color:#e8f5df;font:12px/1.8 'Share Tech Mono',monospace;white-space:pre}
+.command-note{padding:0 14px 13px;color:#ddd;font-size:11px;line-height:1.8}
+.inline-code{color:var(--accent);overflow-wrap:anywhere}
+.sheet-list{padding-left:20px;color:#eee;font-size:12px;line-height:1.9}
+.sheet-list li{margin:5px 0}
+.back-link{display:inline-block;color:var(--accent);text-decoration:none;margin-bottom:22px;font-size:11px;letter-spacing:.1em}
+.back-link:hover{text-decoration:underline}
+.copy-status{position:fixed;right:18px;bottom:18px;z-index:10000;padding:10px 14px;background:var(--accent);color:#050705;font-size:12px;display:none;box-shadow:0 4px 22px #000}
+.copy-status.show{display:block}
+@media(max-width:560px){.command-title{align-items:flex-start}.copy-btn{font-size:0;padding:8px}.copy-btn svg{width:17px;height:17px}.command-code{font-size:11px}.sheet-page{padding-left:14px;padding-right:14px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-left"><a href="../index.html" class="logo">DAVIDE<span>.</span>VESENTINI <span class="logo-handle">aka null0x</span></a></div>
+  <nav>
+    <a href="../index.html" data-short="~">HOME</a><a href="../about.html" data-short="A">ABOUT</a><a href="../projects.html" data-short="P">PROJECTS</a><a href="../certificates.html" data-short="C">CERTS</a><a href="../blog.html" data-short="B">FIELD NOTES</a><a href="../cheat-sheets.html" class="active" data-short="S" aria-current="page">CHEAT SHEETS</a><a href="../contact.html" data-short="@">CONTACT</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="mobile-nav" aria-expanded="false" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</header>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <a href="../index.html">HOME</a><a href="../about.html">ABOUT</a><a href="../projects.html">PROJECTS</a><a href="../certificates.html">CERTS</a><a href="../blog.html">FIELD NOTES</a><a href="../cheat-sheets.html" class="active" aria-current="page">CHEAT SHEETS</a><a href="../contact.html">CONTACT</a>
+</nav>
+<div class="ticker"><div class="ticker-inner"><span>ACTIVE DIRECTORY</span><span class="sep">//</span><span>BLOODYAD</span><span class="sep">//</span><span>LDAP ENUMERATION</span><span class="sep">//</span><span>AUTHORIZED TESTING</span><span class="sep">//</span><span>ACTIVE DIRECTORY</span><span class="sep">//</span><span>BLOODYAD</span><span class="sep">//</span><span>LDAP ENUMERATION</span><span class="sep">//</span><span>AUTHORIZED TESTING</span><span class="sep">//</span></div></div>
+<main class="sheet-page">
+<a class="back-link" href="../cheat-sheets.html">← ALL CHEAT SHEETS</a>
+<header class="sheet-head">
+  <p class="page-eyebrow">CS-04 // ACTIVE DIRECTORY</p>
+  <h1>ACTIVE DIRECTORY <em>PENTESTING</em></h1>
+  <p class="sheet-intro">A practical BloodyAD and Impacket reference for mapping an Active Directory environment, reviewing LDAP attributes, and identifying risky configurations. Commands use placeholders: set them for your authorized lab or assessment before running.</p>
+  <div class="sheet-meta"><span>BLOODYAD</span><span>IMPACKET</span><span>LDAP</span><span>KALI LINUX</span></div>
+</header>
+<div class="notice"><strong>Scope & safety:</strong> Use only against domains you are explicitly authorized to assess. Enumeration commands are separated from high-impact actions. Password changes, account changes, ACL edits, delegation changes, and credential dumping can disrupt systems or expose secrets; do not run them in production without written approval and a rollback plan. Do not publish real credentials or raw credential dumps.</div>
+<nav class="toc" aria-label="On this page">
+<a href="#setup">Setup</a><a href="#enumeration">Enumeration</a><a href="#ldap">LDAP & attributes</a><a href="#kerberos">Kerberos</a><a href="#privileges">Privilege paths</a><a href="#high-impact">High-impact operations</a><a href="#defense">Detection & hardening</a>
+</nav>
+<section class="sheet-section" id="setup">
+<h2>01 // Target setup</h2>
+<p class="section-desc">Set reusable values first. Replace the domain, controller address, and username with values from your assessment.</p>
+<div class="command-card"><div class="command-title"><strong>Export target variables</strong><button class="copy-btn" type="button" data-copy="export DC_IP='10.10.10.10'
+export DOMAIN='corp.local'
+export USER='audituser'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">export DC_IP='10.10.10.10'
+export DOMAIN='corp.local'
+export USER='audituser'</code><p class="command-note">Avoid exporting or hardcoding real passwords. Prefer an approved credential-handling method; shell history and process listings can leak secrets.</p></div>
+</section>
+<section class="sheet-section" id="enumeration">
+<h2>02 // Active Directory enumeration</h2>
+<p class="section-desc">Start by mapping objects and group relationships. Results help build an inventory before testing any attack path.</p>
+<div class="command-card"><div class="command-title"><strong>Enumerate computer objects</strong><button class="copy-btn" type="button" data-copy='bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get children --otype computer'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get children --otype computer</code><p class="command-note">Lists computer objects. Replace <span class="inline-code">$PASS</span> using your approved credential workflow; do not paste real secrets into public notes or shell history.</p></div>
+<div class="command-card"><div class="command-title"><strong>Enumerate user objects</strong><button class="copy-btn" type="button" data-copy='bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get children --otype useronly'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get children --otype useronly</code><p class="command-note">Build a user inventory and note privileged or service accounts for further authorized review.</p></div>
+<div class="command-card"><div class="command-title"><strong>Enumerate containers</strong><button class="copy-btn" type="button" data-copy='bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get children --otype container'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get children --otype container</code><p class="command-note">Useful for understanding how directory objects are organized.</p></div>
+<div class="command-card"><div class="command-title"><strong>Dump DNS records</strong><button class="copy-btn" type="button" data-copy='bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get dnsDump'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get dnsDump</code><p class="command-note">May reveal hostnames and services worth validating against the approved scope.</p></div>
+<div class="command-card"><div class="command-title"><strong>Check a user's group membership</strong><button class="copy-btn" type="button" data-copy='bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get membership TARGET_USER'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get membership TARGET_USER</code><p class="command-note">Replace <span class="inline-code">TARGET_USER</span> with the account to inspect.</p></div>
+<div class="command-card"><div class="command-title"><strong>List Domain Admins members</strong><button class="copy-btn" type="button" data-copy='bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get object "Domain Admins" --attr member'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get object "Domain Admins" --attr member</code><p class="command-note">Identify membership that should be checked against least-privilege policy.</p></div>
+</section>
+<section class="sheet-section" id="ldap">
+<h2>03 // LDAP & object attributes</h2>
+<p class="section-desc">Review account metadata, machine-account quota, and potentially sensitive attributes. Access depends on directory permissions and schema.</p>
+<div class="command-card"><div class="command-title"><strong>Inspect a user object</strong><button class="copy-btn" type="button" data-copy='bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get object TARGET_USER'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get object TARGET_USER</code><p class="command-note">Inspect attributes such as description, memberOf, adminCount, and account configuration. Redact sensitive values in notes.</p></div>
+<div class="command-card"><div class="command-title"><strong>Read machine-account quota</strong><button class="copy-btn" type="button" data-copy='bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get object "DC=corp,DC=local" --attr ms-DS-MachineAccountQuota'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get object "DC=corp,DC=local" --attr ms-DS-MachineAccountQuota</code><p class="command-note">Change the distinguished name to match the target domain. A nonzero value is a configuration detail to assess in context, not proof of a vulnerability on its own.</p></div>
+<div class="command-card"><div class="command-title"><strong>Search descriptions and password attributes</strong><button class="copy-btn" type="button" data-copy='bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get search --filter "(|(userPassword=*)(description=*))" --attr userPassword,description'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get search --filter "(&#40;|&#40;userPassword=*)&#40;description=*)&#41;" --attr userPassword,description</code><p class="command-note">Review results securely. Passwords should never be stored in descriptions or readable custom attributes. Treat any discovered secret as sensitive evidence.</p></div>
+<div class="command-card"><div class="command-title"><strong>Enumerate accounts with an SPN</strong><button class="copy-btn" type="button" data-copy='bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get search --filter "(servicePrincipalName=*)" --attr sAMAccountName,servicePrincipalName'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get search --filter '(servicePrincipalName=*)' --attr sAMAccountName,servicePrincipalName</code><p class="command-note">SPN presence is a starting point for reviewing service-account password policy and Kerberos exposure; it does not alone confirm a weakness.</p></div>
+</section>
+<section class="sheet-section" id="kerberos">
+<h2>04 // Kerberos exposure checks</h2>
+<p class="section-desc">Use these checks to identify accounts that may need additional review. Hash collection and password recovery must be explicitly in scope.</p>
+<div class="command-card"><div class="command-title"><strong>Check for accounts without pre-authentication</strong><button class="copy-btn" type="button" data-copy='impacket-GetNPUsers "$DOMAIN"/ -dc-ip "$DC_IP" -usersfile users.txt -no-pass'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">impacket-GetNPUsers "$DOMAIN"/ -dc-ip "$DC_IP" -usersfile users.txt -no-pass</code><p class="command-note">Provide a scoped user list in <span class="inline-code">users.txt</span>. Review any returned material securely and only perform offline password-strength testing when authorized.</p></div>
+</section>
+<section class="sheet-section" id="privileges">
+<h2>05 // Privileged ACLs & attack paths</h2>
+<p class="section-desc">Prioritize permission review over changing directory state. Use BloodHound CE or equivalent tooling to analyze effective rights and relationships.</p>
+<ul class="sheet-list"><li><strong>GenericAll:</strong> broad control over an object; determine which object and inherited permissions are involved.</li><li><strong>ForceChangePassword:</strong> ability to reset a user's password without knowing the current password.</li><li><strong>Replication rights:</strong> review DS-Replication-Get-Changes and related extended rights; unexpected non-DC principals are high priority.</li><li><strong>WriteProperty:</strong> investigate writes to sensitive attributes, including <span class="inline-code">msDS-KeyCredentialLink</span>.</li><li><strong>Delegation:</strong> inspect RBCD configuration and who can modify <span class="inline-code">msDS-AllowedToActOnBehalfOfOtherIdentity</span>.</li></ul>
+</section>
+<section class="sheet-section" id="high-impact">
+<h2>06 // High-impact operations</h2>
+<p class="section-desc">These examples are included to make the risk explicit. They modify access or may expose credentials; prefer read-only auditing and isolated lab validation.</p>
+<div class="command-card"><div class="command-title"><strong>Grant DCSync rights — lab only</strong><button class="copy-btn" type="button" data-copy='bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" add dcsync TARGET_USER'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" add dcsync TARGET_USER</code><p class="command-note">This changes directory permissions and may enable domain credential extraction. Do not use as a routine test. Document approval, scope, and cleanup before any lab validation.</p></div>
+<div class="command-card"><div class="command-title"><strong>Impacket secretsdump — highly sensitive</strong><button class="copy-btn" type="button" data-copy='impacket-secretsdump "$DOMAIN"/"$USER":PASSWORD@"$DC_IP"'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">impacket-secretsdump "$DOMAIN"/"$USER":PASSWORD@"$DC_IP"</code><p class="command-note">Replace PASSWORD only in a controlled environment. This may expose hashes and other credential material depending on privileges and method. Never store or publish the output unredacted.</p></div>
+<div class="command-card"><div class="command-title"><strong>Read legacy LAPS metadata</strong><button class="copy-btn" type="button" data-copy='bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get search --filter "(ms-mcs-admpwdexpirationtime=*)" --attr ms-mcs-admpwd,ms-mcs-admpwdexpirationtime'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg><span>Copy</span></button></div><code class="command-code">bloodyAD --host "$DC_IP" -d "$DOMAIN" -u "$USER" -p "$PASS" get search --filter '(ms-mcs-admpwdexpirationtime=*)' --attr ms-mcs-admpwd,ms-mcs-admpwdexpirationtime</code><p class="command-note">Legacy LAPS uses these attributes. Windows LAPS may use <span class="inline-code">msLAPS-Password</span> and <span class="inline-code">msLAPS-PasswordExpirationTime</span>. Reading a password attribute is sensitive and should be tightly controlled.</p></div>
+</section>
+<section class="sheet-section" id="defense">
+<h2>07 // Detection & hardening checklist</h2>
+<ul class="sheet-list"><li>Audit SPNs and service-account password strength; prefer managed service accounts where appropriate.</li><li>Ensure Kerberos pre-authentication is enabled unless a documented exception exists.</li><li>Monitor Event ID 4769 for unusual service-ticket activity and Event ID 4662 for suspicious directory replication access.</li><li>Monitor Event ID 5136 for sensitive directory-object changes.</li><li>Audit privileged group membership, DCSync rights, ACLs, delegation settings, and writes to <span class="inline-code">msDS-KeyCredentialLink</span>.</li><li>Review machine-account quota and reduce it where business requirements allow.</li><li>Never store passwords in LDAP descriptions or custom attributes; use LAPS to manage local administrator credentials.</li><li>Use least privilege, tiered administration, and periodic BloodHound CE / directory-permission reviews.</li></ul>
+</section>
+<section class="sheet-section">
+<h2>References</h2>
+<ul class="sheet-list"><li><a href="https://github.com/CravateRouge/bloodyAD" rel="noopener noreferrer" target="_blank">BloodyAD documentation</a></li><li><a href="https://github.com/fortra/impacket" rel="noopener noreferrer" target="_blank">Impacket</a></li><li><a href="https://github.com/SpecterOps/BloodHound" rel="noopener noreferrer" target="_blank">BloodHound CE</a></li><li><a href="https://github.com/Pennyw0rth/NetExec" rel="noopener noreferrer" target="_blank">NetExec</a></li></ul>
+<p class="section-desc" style="margin-top:14px">This reference is based on the supplied “Active Directory Penetration Testing with BloodyAD” document. Confirm command syntax against your installed tool version and target environment.</p>
+</section>
+</main>
+<footer><div>© 2026 DAVIDE VESENTINI — ALL RIGHTS RESERVED</div><div style="display:flex;gap:18px;flex-wrap:wrap"><a href="../about.html">ABOUT</a><a href="../projects.html">PROJECTS</a><a href="../certificates.html">CERTS</a><a href="../blog.html">FIELD NOTES</a><a href="../cheat-sheets.html">CHEAT SHEETS</a><a href="../contact.html">CONTACT</a></div><div class="footer-signal">● SIGNAL ACTIVE</div></footer>
+<div class="copy-status" id="copy-status" role="status" aria-live="polite">Command copied to clipboard</div>
+<script>
+function toggleMenu(){const menu=document.getElementById('mobile-nav'),button=document.getElementById('hamburger');if(!menu||!button)return;const open=menu.classList.toggle('open');button.classList.toggle('open',open);button.setAttribute('aria-expanded',String(open));}
+document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>{const menu=document.getElementById('mobile-nav'),button=document.getElementById('hamburger');if(menu)menu.classList.remove('open');if(button){button.classList.remove('open');button.setAttribute('aria-expanded','false');}}));
+const copyStatus=document.getElementById('copy-status');
+document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{const text=button.getAttribute('data-copy')||'';try{await navigator.clipboard.writeText(text);}catch(error){const area=document.createElement('textarea');area.value=text;area.setAttribute('readonly','');area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();const ok=document.execCommand('copy');area.remove();if(!ok){copyStatus.textContent='Copy failed — select the command manually';copyStatus.classList.add('show');window.setTimeout(()=>copyStatus.classList.remove('show'),2200);return;}}copyStatus.textContent='Command copied to clipboard';copyStatus.classList.add('show');button.querySelector('span').textContent='Copied';window.setTimeout(()=>{copyStatus.classList.remove('show');button.querySelector('span').textContent='Copy';},1600);}));
+</script>
+</body>
+</html>
