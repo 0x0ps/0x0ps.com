@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="style.css">
 <style>
   .intro { max-width:760px; color:var(--muted); font-size:12px; line-height:1.9; margin-bottom:30px; }
-  .sheet-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1px; background:#000000; border:1px solid #000000; }
+  .sheet-search{display:grid;grid-template-columns:1fr;gap:8px;max-width:560px;margin:0 0 18px}.sheet-search label{font-size:10px;letter-spacing:.14em;color:var(--accent)}.sheet-search input{background:#000;border:1px solid var(--border);color:#fff;padding:12px;font:12px monospace;outline:none}.sheet-search input:focus{border-color:var(--accent)}.sheet-search span{font-size:10px;color:var(--muted)}.sheet-card.filtered-out{display:none}.sheet-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1px; background:#000000; border:1px solid #000000; }
   .sheet-card { background:#000000; min-height:150px; padding:22px; display:flex; flex-direction:column; text-decoration:none; color:inherit; transition:background .2s,border-color .2s; }
   a.sheet-card:hover { background:#080d07; outline:1px solid var(--accent); outline-offset:-1px; }
   .sheet-code { color:var(--accent); font-size:11px; letter-spacing:.14em; margin-bottom:16px; }
@@ -50,7 +50,8 @@
 <main class="page">
   <div class="page-header fade-up"><p class="page-eyebrow">04 — QUICK REFERENCE</p><h1>COMMAND <em>CHEAT SHEETS</em></h1></div>
   <p class="intro">A practical command library for tools, workflows, and techniques I use in labs and security research. Each cheat sheet can grow into its own focused page, with copy-friendly commands and short explanations.</p>
-  <div class="sheet-grid">
+  <div class="sheet-search"><label for="sheet-filter">FILTER CHEAT SHEETS</label><input id="sheet-filter" type="search" placeholder="Search Linux, networking, Active Directory…" autocomplete="off"><span id="sheet-filter-count" aria-live="polite"></span></div>
+<div class="sheet-grid">
     <article class="sheet-card"><div class="sheet-code">[ CS-01 ]</div><h2>LINUX & SHELL</h2><p>Shell basics, file operations, permissions, processes, and troubleshooting.</p><div class="sheet-status">AWAITING FIRST ENTRY</div></article>
     <article class="sheet-card"><div class="sheet-code">[ CS-02 ]</div><h2>NETWORKING</h2><p>DNS, routing, packet analysis, connectivity checks, and network utilities.</p><div class="sheet-status">AWAITING FIRST ENTRY</div></article>
     <article class="sheet-card"><div class="sheet-code">[ CS-03 ]</div><h2>WEB SECURITY</h2><p>HTTP inspection, web enumeration, proxy workflows, and testing references.</p><div class="sheet-status">AWAITING FIRST ENTRY</div></article>
@@ -67,6 +68,9 @@
 <script>
 function toggleMenu(){const menu=document.getElementById('mobile-nav'),button=document.getElementById('hamburger');if(!menu||!button)return;const open=menu.classList.toggle('open');button.classList.toggle('open',open);button.setAttribute('aria-expanded',String(open));}
 document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>{const menu=document.getElementById('mobile-nav'),button=document.getElementById('hamburger');if(menu)menu.classList.remove('open');if(button){button.classList.remove('open');button.setAttribute('aria-expanded','false');}}));
+const sheetFilter=document.getElementById('sheet-filter'),sheetFilterCount=document.getElementById('sheet-filter-count');
+function filterSheets(){const q=(sheetFilter.value||'').trim().toLowerCase();let visible=0;document.querySelectorAll('.sheet-card').forEach(card=>{const match=!q||card.innerText.toLowerCase().includes(q);card.classList.toggle('filtered-out',!match);if(match)visible++;});sheetFilterCount.textContent=visible+' of '+document.querySelectorAll('.sheet-card').length+' cheat sheets';}
+if(sheetFilter){sheetFilter.addEventListener('input',filterSheets);filterSheets();}
 </script>
 </body>
 </html>
