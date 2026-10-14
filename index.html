@@ -224,6 +224,15 @@
   .home-note-card p { color:#eee; font-size:12px; line-height:1.8; }
   .home-note-card .read-more { color:var(--accent); margin-top:auto; font-size:11px; letter-spacing:.12em; }
   @media(prefers-reduced-motion:reduce){.home-note-card{transition:none}.home-note-card:hover{transform:none}}
+
+  /* Subtle intermittent glitch on the hero name; the real heading remains readable. */
+  .hero h1.glitch-name{position:relative;isolation:isolate}
+  .hero h1.glitch-name::before,.hero h1.glitch-name::after{content:attr(data-text);position:absolute;inset:0;pointer-events:none;white-space:nowrap;opacity:0;overflow:hidden;z-index:2}
+  .hero h1.glitch-name::before{color:#ff3b7a;text-shadow:2px 0 #ff3b7a;animation:name-glitch-a 4.8s steps(1,end) infinite}
+  .hero h1.glitch-name::after{color:#35f5ff;text-shadow:-2px 0 #35f5ff;animation:name-glitch-b 4.8s steps(1,end) infinite}
+  @keyframes name-glitch-a{0%,91%,94%,100%{opacity:0;clip-path:inset(0 0 100% 0);transform:translateX(0)}92%{opacity:.85;clip-path:inset(12% 0 68% 0);transform:translateX(-4px)}93%{opacity:.75;clip-path:inset(55% 0 24% 0);transform:translateX(3px)}}
+  @keyframes name-glitch-b{0%,91%,94%,100%{opacity:0;clip-path:inset(100% 0 0 0);transform:translateX(0)}92.5%{opacity:.85;clip-path:inset(35% 0 42% 0);transform:translateX(4px)}93.5%{opacity:.75;clip-path:inset(72% 0 8% 0);transform:translateX(-3px)}}
+  @media(prefers-reduced-motion:reduce){.hero h1.glitch-name::before,.hero h1.glitch-name::after{animation:none;opacity:0}}
 </style>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://0x0ps.com/#person","name":"Davide Vesentini","alternateName":"null0x","url":"https://0x0ps.com/","sameAs":["https://linkedin.com/in/davidevesentini","https://github.com/0x0ps","https://www.youtube.com/@null0xops"],"jobTitle":"Cybersecurity Practitioner","knowsAbout":["Offensive Security","Penetration Testing","Red Teaming","Network Engineering","AI Security"]},{"@type":"WebSite","@id":"https://0x0ps.com/#website","url":"https://0x0ps.com/","name":"0x0ps","publisher":{"@id":"https://0x0ps.com/#person"},"inLanguage":"en"}]}</script>
@@ -283,7 +292,7 @@
 <section class="hero">
   <div class="hero-text">
     <p class="hero-eyebrow fade-up">OFFENSIVE SECURITY // <span>AI SECURITY</span></p>
-    <h1 class="fade-up fade-up-2">DAVIDE <span class="accent">VESENTINI</span></h1>
+    <h1 class="fade-up fade-up-2 glitch-name" data-text="DAVIDE VESENTINI">DAVIDE <span class="accent">VESENTINI</span></h1>
     <p class="hero-handle">// aka <strong>null0x</strong></p>
     <p class="hero-role fade-up fade-up-3">Research. Build. Test assumptions — ethically.</p>
     <p class="hero-summary fade-up fade-up-3">Cybersecurity practitioner focused on offensive security, red-team tradecraft, network engineering, and emerging AI security challenges.</p>
