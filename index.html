@@ -206,45 +206,7 @@
 .logo-handle { font-size:10px; color:var(--accent); letter-spacing:0.2em; }
   .hero-handle { font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; margin-top: 10px; }
   .hero-summary { max-width: 560px; color: #ffffff; font-weight: 400; line-height: 1.85; margin: -22px 0 28px; font-size: 16px; }
-  .profile-img { object-fit: contain; background: #050705; padding: 12px; filter: none; }
-
-  /* Fixed emblem with brief electric pulses; the crosshair remains stationary. */
-  .profile-img-wrap > .profile-img {
-    position: relative;
-    z-index: 1;
-    animation: electric-glow 2.8s steps(1,end) infinite;
-  }
-  .profile-img-wrap .electric-arcs {
-    position: absolute;
-    inset: 10px;
-    z-index: 2;
-    pointer-events: none;
-    opacity: 0;
-    background:
-      linear-gradient(112deg, transparent 0 24%, #eaffc2 24.5% 25.2%, #a7ff32 25.6% 26.2%, transparent 26.8% 100%),
-      linear-gradient(72deg, transparent 0 47%, #f4ffd9 47.5% 48.2%, #a7ff32 48.6% 49.2%, transparent 49.8% 100%),
-      linear-gradient(135deg, transparent 0 65%, #eaffc2 65.4% 66%, #a7ff32 66.4% 67%, transparent 67.5% 100%);
-    filter: drop-shadow(0 0 3px #a7ff32) drop-shadow(0 0 7px #a7ff32);
-    mix-blend-mode: screen;
-    animation: electric-arc 2.8s steps(1,end) infinite;
-  }
-  @keyframes electric-glow {
-    0%, 72%, 76%, 100% { filter: none; }
-    73% { filter: drop-shadow(0 0 4px #a7ff32) drop-shadow(0 0 13px rgba(167,255,50,.9)); }
-    74% { filter: none; }
-    75% { filter: drop-shadow(0 0 7px #eaffc2) drop-shadow(0 0 16px #a7ff32); }
-  }
-  @keyframes electric-arc {
-    0%, 71%, 77%, 100% { opacity: 0; }
-    72% { opacity: .95; transform: translateX(1px); }
-    73% { opacity: .25; transform: translateX(-1px); }
-    74% { opacity: 1; transform: translateX(2px); }
-    75% { opacity: .55; transform: translateX(-2px); }
-    76% { opacity: 0; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .profile-img-wrap > .profile-img, .profile-img-wrap .electric-arcs { animation: none; }
-  }
+  .profile-img { object-fit: contain; background: transparent; padding: 0; filter: none; }
   .hero-stats { gap: clamp(18px, 3vw, 40px); }
   .st .n { font-size: clamp(1.25rem, 2.3vw, 1.9rem); }
   @media (max-width: 860px) { .hero-summary { margin-top: -20px; } }
@@ -353,7 +315,6 @@
     <div class="profile-frame">
       <div class="profile-img-wrap">
         <img src="assets/0x0ps.png" alt="0x0ps cyber emblem" class="profile-img" width="200" height="200">
-        <span class="electric-arcs" aria-hidden="true"></span>
       </div>
       <div class="profile-badge">FOCUS: <span>OFFENSIVE + AI SECURITY</span></div>
       <div style="font-size:10px;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase;">
