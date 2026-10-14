@@ -207,6 +207,23 @@
   .hero-handle { font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; margin-top: 10px; }
   .hero-summary { max-width: 560px; color: #ffffff; font-weight: 400; line-height: 1.85; margin: -22px 0 28px; font-size: 16px; }
   .profile-img { object-fit: contain; background: #050705; padding: 12px; filter: none; }
+
+  /* The crosshair stays locked while the 0x0ps emblem spins like a coin. */
+  .profile-img-wrap { perspective: 900px; }
+  .profile-img-wrap .profile-img {
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    animation: coin-spin 3.8s linear infinite;
+    will-change: transform;
+    backface-visibility: visible;
+  }
+  @keyframes coin-spin {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .profile-img-wrap .profile-img { animation: none; }
+  }
   .hero-stats { gap: clamp(18px, 3vw, 40px); }
   .st .n { font-size: clamp(1.25rem, 2.3vw, 1.9rem); }
   @media (max-width: 860px) { .hero-summary { margin-top: -20px; } }
