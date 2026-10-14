@@ -506,10 +506,11 @@ nav a { padding-left: clamp(4px, 0.5vw, 8px); padding-right: clamp(4px, 0.5vw, 8
   header.topbar > nav:not(.mobile-nav) a {
     display: inline-block !important;
     flex: none !important;
-    padding: 0 5px !important;
+    padding: 0 7px !important;
     margin: 0 !important;
-    font-size: 10px !important;
-    letter-spacing: 0.025em !important;
+    font-size: 12px !important;
+    letter-spacing: 0.03em !important;
+    line-height: 1.3 !important;
     white-space: nowrap !important;
   }
   header.topbar > .hamburger {
