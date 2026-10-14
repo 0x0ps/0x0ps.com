@@ -25,11 +25,9 @@ body::before, body::after { display:none !important; }
 .threat-map-description { color:var(--muted); font-size:12px; line-height:1.8; max-width:700px; margin-top:12px; }
 .threat-map-frame { position:relative; border:1px solid var(--border); background:#050705; box-shadow:0 0 0 1px rgba(167,255,50,.04),0 18px 60px rgba(0,0,0,.35); overflow:hidden; }
 .threat-map-frame::before { content:''; display:block; height:3px; background:linear-gradient(90deg,var(--accent),transparent 75%); }
-.threat-map-frame iframe { display:block; width:100%; height:min(72vh,820px); min-height:460px; border:0; background:#050705; }
+.threat-map-frame iframe { display:block; width:100%; height:min(82vh,1000px); min-height:560px; border:0; background:#050705; }
 .threat-map-credit { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; color:var(--muted); font-size:10px; letter-spacing:.12em; text-transform:uppercase; margin-top:12px; }
-.threat-map-credit a { color:var(--accent); text-decoration:none; }
-.threat-map-credit a:hover { text-decoration:underline; }
-@media(max-width:700px) { .threat-map-page { padding:26px 12px 32px; } .threat-map-frame iframe { height:68vh; min-height:400px; } }
+@media(max-width:700px) { .threat-map-page { padding:26px 12px 32px; } .threat-map-frame iframe { height:78vh; min-height:480px; } }
 </style>
 </head>
 <body>
@@ -67,12 +65,11 @@ body::before, body::after { display:none !important; }
       <div>
         <p class="threat-map-eyebrow">// GLOBAL THREAT INTELLIGENCE</p>
         <h1>CYBERTHREAT <span>LIVE MAP</span></h1>
-        <p class="threat-map-description">Explore the global cyberthreat landscape through Kaspersky's live threat map. The interactive map below is provided by Kaspersky.</p>
+        <p class="threat-map-description">Explore the global cyberthreat landscape with the interactive live map, embedded directly in 0x0ps. Use the map controls and mouse wheel to zoom where supported.</p>
       </div>
-      <a class="btn btn-ghost" href="https://cybermap.kaspersky.com/it/" target="_blank" rel="noopener noreferrer">OPEN ON KASPERSKY ↗</a>
     </header>
     <div class="threat-map-frame">
-      <iframe src="https://cybermap.kaspersky.com/it/widget/dynamic/dark" title="Kaspersky Cyberthreat Live Map" loading="eager" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <iframe src="https://cybermap.kaspersky.com/it/" title="Kaspersky Cyberthreat Live Map — interactive map" loading="eager" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
     <div class="threat-map-credit">
       <span>LIVE FEED // EXTERNAL WIDGET</span>
