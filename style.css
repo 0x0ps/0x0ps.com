@@ -99,17 +99,21 @@ nav {
   display: flex;
   align-items: stretch;
   height: 100%;
+  flex: 0 1 auto;
+  min-width: 0;
 }
 
 nav a {
   display: flex;
   align-items: center;
-  padding: 0 22px;
+  flex: 0 1 auto;
+  white-space: nowrap;
+  padding: 0 clamp(5px, 0.62vw, 10px);
   color: var(--accent);
   text-decoration: none;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: clamp(8px, 0.68vw, 10px);
   border-left: 1px solid var(--border);
   transition: color 0.2s, background 0.2s;
   position: relative;
@@ -399,9 +403,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 body { cursor: default; }
 a, button { cursor: pointer; }
-.topbar { gap: 16px; }
-.topbar nav { flex-shrink: 0; }
-nav a { padding-left: clamp(9px, 1.15vw, 17px); padding-right: clamp(9px, 1.15vw, 17px); }
+.topbar { gap: 10px; padding-left: clamp(12px, 2vw, 28px); padding-right: clamp(12px, 2vw, 28px); }
+.topbar-left { flex: 0 1 auto; min-width: 0; }
+.topbar nav { flex: 0 1 auto; min-width: 0; }
+.topbar .logo { font-size: clamp(10px, 0.9vw, 12px); letter-spacing: 0.08em; }
+nav a { padding-left: clamp(4px, 0.5vw, 8px); padding-right: clamp(4px, 0.5vw, 8px); }
 .mobile-nav a { min-height: 48px; }
 .mobile-nav a::before { color: var(--accent); }
 .mobile-nav a.active { color: #ffffff; background: var(--bg2); }
