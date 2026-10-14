@@ -423,3 +423,25 @@ nav a { padding-left: clamp(4px, 0.5vw, 8px); padding-right: clamp(4px, 0.5vw, 8
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* Keep every desktop navigation item visible on internal pages too. */
+.topbar { width: 100%; box-sizing: border-box; }
+.topbar nav {
+  flex: 1 1 0;
+  justify-content: space-between;
+  min-width: 0;
+  overflow: visible;
+}
+.topbar nav a {
+  flex: 0 1 auto;
+  padding-left: clamp(3px, 0.38vw, 7px);
+  padding-right: clamp(3px, 0.38vw, 7px);
+  font-size: clamp(7px, 0.62vw, 9px);
+  letter-spacing: 0.035em;
+}
+.topbar-left { flex: 0 0 auto; }
+@media (min-width: 769px) {
+  .topbar nav { display: flex; }
+  .topbar .hamburger { display: none; }
+}
