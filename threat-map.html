@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Explore Kaspersky's live cyberthreat map on 0x0ps.">
+<meta name="theme-color" content="#050705">
+<title>Live Cyberthreat Map | 0x0ps</title>
+<link rel="canonical" href="https://0x0ps.com/threat-map.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="0x0ps">
+<meta property="og:title" content="Live Cyberthreat Map | 0x0ps">
+<meta property="og:description" content="Explore the global cyberthreat landscape with Kaspersky's live map.">
+<meta property="og:url" content="https://0x0ps.com/threat-map.html">
+<link rel="stylesheet" href="style.css">
+<style>
+html, body { background:#000 !important; background-image:none !important; }
+body::before, body::after { display:none !important; }
+.threat-map-page { width:100%; flex:1; padding:clamp(24px,4vw,56px) clamp(14px,3vw,44px) 42px; background:#000; }
+.threat-map-inner { width:100%; max-width:1600px; margin:0 auto; }
+.threat-map-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:22px; flex-wrap:wrap; margin-bottom:20px; }
+.threat-map-eyebrow { color:var(--accent); font-size:10px; letter-spacing:.24em; text-transform:uppercase; margin-bottom:8px; }
+.threat-map-heading h1 { color:#fff; font:900 clamp(1.5rem,4vw,3rem)/1.15 'Orbitron',monospace; text-transform:uppercase; }
+.threat-map-heading h1 span { color:var(--accent); }
+.threat-map-description { color:var(--muted); font-size:12px; line-height:1.8; max-width:700px; margin-top:12px; }
+.threat-map-frame { position:relative; border:1px solid var(--border); background:#050705; box-shadow:0 0 0 1px rgba(167,255,50,.04),0 18px 60px rgba(0,0,0,.35); overflow:hidden; }
+.threat-map-frame::before { content:''; display:block; height:3px; background:linear-gradient(90deg,var(--accent),transparent 75%); }
+.threat-map-frame iframe { display:block; width:100%; height:min(72vh,820px); min-height:460px; border:0; background:#050705; }
+.threat-map-credit { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; color:var(--muted); font-size:10px; letter-spacing:.12em; text-transform:uppercase; margin-top:12px; }
+.threat-map-credit a { color:var(--accent); text-decoration:none; }
+.threat-map-credit a:hover { text-decoration:underline; }
+@media(max-width:700px) { .threat-map-page { padding:26px 12px 32px; } .threat-map-frame iframe { height:68vh; min-height:400px; } }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-left"><a href="index.html" class="logo">DAVIDE<span>.</span>VESENTINI <span class="logo-handle">aka null0x</span></a></div>
+  <nav>
+    <a href="index.html" data-short="~">HOME</a>
+    <a href="about.html" data-short="A">ABOUT</a>
+    <a href="projects.html" data-short="P">PROJECTS</a>
+    <a href="certificates.html" data-short="C">CERTS</a>
+    <a href="blog.html" data-short="B">FIELD NOTES</a>
+    <a href="cheat-sheets.html" data-short="S">CHEAT SHEETS</a>
+    <a href="threat-map.html" class="active" data-short="T" aria-current="page">THREAT MAP</a>
+    <a href="contact.html" data-short="@">CONTACT</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="mobile-nav" aria-expanded="false" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</header>
+<div class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="projects.html">Projects</a>
+  <a href="certificates.html">Certifications</a>
+  <a href="blog.html">Field Notes</a>
+  <a href="cheat-sheets.html">CHEAT SHEETS</a>
+  <a href="threat-map.html" class="active" aria-current="page">Threat Map</a>
+  <a href="contact.html">Contact</a>
+</div>
+<div class="ticker"><div class="ticker-inner">
+  <span>GLOBAL THREAT INTELLIGENCE</span><span class="sep">//</span><span>LIVE CYBERTHREAT MAP</span><span class="sep">//</span><span>SECURITY MONITORING</span><span class="sep">//</span>
+  <span>GLOBAL THREAT INTELLIGENCE</span><span class="sep">//</span><span>LIVE CYBERTHREAT MAP</span><span class="sep">//</span><span>SECURITY MONITORING</span><span class="sep">//</span>
+</div></div>
+<main class="threat-map-page">
+  <div class="threat-map-inner">
+    <header class="threat-map-heading">
+      <div>
+        <p class="threat-map-eyebrow">// GLOBAL THREAT INTELLIGENCE</p>
+        <h1>CYBERTHREAT <span>LIVE MAP</span></h1>
+        <p class="threat-map-description">Explore the global cyberthreat landscape through Kaspersky's live threat map. The interactive map below is provided by Kaspersky.</p>
+      </div>
+      <a class="btn btn-ghost" href="https://cybermap.kaspersky.com/it/" target="_blank" rel="noopener noreferrer">OPEN ON KASPERSKY ↗</a>
+    </header>
+    <div class="threat-map-frame">
+      <iframe src="https://cybermap.kaspersky.com/it/widget/dynamic/dark" title="Kaspersky Cyberthreat Live Map" loading="eager" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div class="threat-map-credit">
+      <span>LIVE FEED // EXTERNAL WIDGET</span>
+      <span>Map and data provided by <a href="https://www.kaspersky.com/" target="_blank" rel="noopener noreferrer">Kaspersky</a></span>
+    </div>
+  </div>
+</main>
+<footer>
+  <div>© 2026 DAVIDE VESENTINI — ALL RIGHTS RESERVED</div>
+  <div style="display:flex;gap:18px;flex-wrap:wrap;">
+    <a href="about.html">ABOUT</a><a href="projects.html">PROJECTS</a><a href="certificates.html">CERTS</a><a href="blog.html">FIELD NOTES</a><a href="cheat-sheets.html">CHEAT SHEETS</a><a href="threat-map.html">THREAT MAP</a><a href="contact.html">CONTACT</a>
+  </div>
+  <div class="footer-signal">● SIGNAL ACTIVE</div>
+</footer>
+<script>
+function toggleMenu() {
+  const menu = document.getElementById('mobile-nav');
+  const button = document.getElementById('hamburger');
+  if (!menu || !button) return;
+  const open = menu.classList.toggle('open');
+  button.classList.toggle('open', open);
+  button.setAttribute('aria-expanded', String(open));
+}
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => {
+  const menu = document.getElementById('mobile-nav');
+  const button = document.getElementById('hamburger');
+  if (menu) menu.classList.remove('open');
+  if (button) { button.classList.remove('open'); button.setAttribute('aria-expanded', 'false'); }
+}));
+</script>
+</body>
+</html>
