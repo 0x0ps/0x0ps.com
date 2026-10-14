@@ -223,18 +223,18 @@
     overflow: visible; pointer-events: none;
   }
   .electric-traces .electric-bolt {
-    fill: none; stroke: #c8ff68; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
-    stroke-dasharray: 12 190; stroke-dashoffset: 202; opacity: 0;
-    animation: conductor-surge 3.4s linear infinite;
+    fill: none; stroke: #eaff9a; stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 18 184; stroke-dashoffset: 202; opacity: 0;
+    animation: conductor-surge 2.7s linear infinite;
   }
   .electric-traces .electric-bolt path:nth-child(2) { animation-delay: .08s; }
   .electric-traces .electric-bolt path:nth-child(3) { animation-delay: .16s; }
   @keyframes conductor-surge {
-    0%, 58%, 100% { stroke-dashoffset: 202; opacity: 0; }
-    61% { opacity: 1; }
-    76% { stroke-dashoffset: 0; opacity: 1; }
-    84% { stroke-dashoffset: -190; opacity: .15; }
-    88% { opacity: 0; }
+    0%, 48%, 100% { stroke-dashoffset: 202; opacity: 0; }
+    51% { opacity: 1; }
+    70% { stroke-dashoffset: 0; opacity: 1; }
+    79% { stroke-dashoffset: -190; opacity: .28; }
+    84% { opacity: 0; }
   }
   @media (prefers-reduced-motion: reduce) { .electric-traces .electric-bolt { animation: none; opacity: 0; } }
   .hero-stats { gap: clamp(18px, 3vw, 40px); }
@@ -347,9 +347,14 @@
         <img src="assets/0x0ps.png" alt="0x0ps cyber emblem" class="profile-img" width="200" height="200">
         <svg class="electric-traces" viewBox="0 0 200 200" aria-hidden="true">
           <defs>
-            <filter id="electric-neon" x="-60%" y="-60%" width="220%" height="220%">
-              <feGaussianBlur stdDeviation="2.2" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            <filter id="electric-neon" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="4.5" result="outerGlow"/>
+              <feGaussianBlur in="SourceGraphic" stdDeviation="1.4" result="innerGlow"/>
+              <feMerge>
+                <feMergeNode in="outerGlow"/>
+                <feMergeNode in="innerGlow"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
             </filter>
           </defs>
           <g class="electric-bolt" filter="url(#electric-neon)">
