@@ -519,3 +519,23 @@ nav a { padding-left: clamp(4px, 0.5vw, 8px); padding-right: clamp(4px, 0.5vw, 8
     display: none !important;
   }
 }
+
+
+/* MOBILE NAV FIX: keep every destination, including Threat Map, reachable on short screens */
+@media screen and (max-width: 768px) {
+  .mobile-nav {
+    max-height: calc(100vh - 52px);
+    max-height: calc(100dvh - 52px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1000;
+  }
+  .mobile-nav a[href="threat-map.html"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex: 0 0 auto;
+    position: relative;
+  }
+}
