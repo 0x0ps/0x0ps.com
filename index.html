@@ -208,21 +208,30 @@
   .hero-summary { max-width: 560px; color: #ffffff; font-weight: 400; line-height: 1.85; margin: -22px 0 28px; font-size: 16px; }
   .profile-img { object-fit: contain; background: #050705; padding: 12px; filter: none; }
 
-  /* The crosshair stays locked while the 0x0ps emblem spins like a coin. */
-  .profile-img-wrap { perspective: 900px; }
-  .profile-img-wrap .profile-img {
+  /* Spin only the emblem: the crosshair pseudo-elements stay fixed in place. */
+  .profile-img-wrap { perspective: 700px; }
+  .profile-img-wrap .coin-logo {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    z-index: 1;
     transform-style: preserve-3d;
     transform-origin: center center;
-    animation: coin-spin 3.8s linear infinite;
+    animation: coin-spin 3s linear infinite;
     will-change: transform;
-    backface-visibility: visible;
+  }
+  .profile-img-wrap .coin-logo .profile-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
   }
   @keyframes coin-spin {
-    from { transform: rotateY(0deg); }
-    to { transform: rotateY(360deg); }
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .profile-img-wrap .profile-img { animation: none; }
+    .profile-img-wrap .coin-logo { animation: none; }
   }
   .hero-stats { gap: clamp(18px, 3vw, 40px); }
   .st .n { font-size: clamp(1.25rem, 2.3vw, 1.9rem); }
@@ -331,7 +340,9 @@
   <div class="hero-visual">
     <div class="profile-frame">
       <div class="profile-img-wrap">
-        <img src="assets/0x0ps.png" alt="0x0ps cyber emblem" class="profile-img" width="200" height="200">
+        <div class="coin-logo">
+          <img src="assets/0x0ps.png" alt="0x0ps cyber emblem" class="profile-img" width="200" height="200">
+        </div>
       </div>
       <div class="profile-badge">FOCUS: <span>OFFENSIVE + AI SECURITY</span></div>
       <div style="font-size:10px;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase;">
