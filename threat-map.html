@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Explore the live Kaspersky cyberthreat map embedded in 0x0ps.">
+<meta name="description" content="Explore Radware's live cyberthreat map embedded in 0x0ps.">
 <meta name="theme-color" content="#050705">
-<title>Live Cyber Threat Map | 0x0ps</title>
+<title>Radware Live Threat Map | 0x0ps</title>
 <link rel="canonical" href="https://0x0ps.com/threat-map.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="0x0ps">
-<meta property="og:title" content="Live Cyber Threat Map | 0x0ps">
-<meta property="og:description" content="Explore the live Kaspersky cyberthreat map embedded in 0x0ps.">
+<meta property="og:title" content="Radware Live Threat Map | 0x0ps">
+<meta property="og:description" content="Explore Radware's live cyberthreat map embedded in 0x0ps.">
 <meta property="og:url" content="https://0x0ps.com/threat-map.html">
 <link rel="stylesheet" href="style.css">
 <style>
@@ -25,13 +25,11 @@ body::before, body::after { display:none !important; }
 .threat-map-description { color:var(--muted); font-size:12px; line-height:1.8; max-width:700px; margin-top:12px; }
 .threat-map-frame { position:relative; border:1px solid var(--border); background:#050705; box-shadow:0 0 0 1px rgba(167,255,50,.04),0 18px 60px rgba(0,0,0,.35); overflow:hidden; }
 .threat-map-frame::before { content:''; display:block; height:3px; background:linear-gradient(90deg,var(--accent),transparent 75%); }
-.threat-map-frame iframe, .threat-map-frame .kas-cybermap-widget { display:block; width:100%; max-width:100%; min-height:560px; border:0; background:#050705; }
-.threat-map-frame .kas-cybermap-widget { height:min(82vh,800px); }
-.threat-map-frame .kas-cybermap-widget iframe { width:100% !important; max-width:100% !important; height:100% !important; min-height:560px; border:0; display:block; }
+.threat-map-frame iframe { display:block; width:100%; max-width:100%; height:min(82vh,800px); min-height:560px; border:0; background:#050705; }
 .threat-map-open { color:var(--accent); text-decoration:none; }
 .threat-map-open:hover { text-decoration:underline; }
 .threat-map-credit { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; color:var(--muted); font-size:10px; letter-spacing:.12em; text-transform:uppercase; margin-top:12px; }
-@media(max-width:700px) { .threat-map-page { padding:26px 12px 32px; } .threat-map-frame iframe, .threat-map-frame .kas-cybermap-widget { height:78vh; min-height:480px; } }
+@media(max-width:700px) { .threat-map-page { padding:26px 12px 32px; } .threat-map-frame iframe { height:78vh; min-height:480px; } }
 </style>
 </head>
 <body>
@@ -69,16 +67,16 @@ body::before, body::after { display:none !important; }
       <div>
         <p class="threat-map-eyebrow">// THREAT INTELLIGENCE // LIVE FEED</p>
         <h1>GLOBAL <span>THREAT MAP</span></h1>
-        <p class="threat-map-description">Live cyberthreat activity visualized by Kaspersky. Use the embedded map controls to explore the globe and inspect threat events. This is global telemetry, not a view of attacks specifically targeting this website.</p>
+        <p class="threat-map-description">Live cyberattack activity visualized by Radware Threat Intelligence. Explore observed attack activity and global threat trends. This is sampled global telemetry, not a view of attacks specifically targeting this website.</p>
       </div>
-      <a class="btn" href="https://cybermap.kaspersky.com/en/" target="_blank" rel="noopener noreferrer">OPEN FULL MAP ↗</a>
+      <a class="btn" href="https://livethreatmap.radware.com/" target="_blank" rel="noopener noreferrer">OPEN FULL MAP ↗</a>
     </header>
     <div class="threat-map-frame">
-      <div class="kas-cybermap-widget" data-width="1200" data-height="800" data-language="en" aria-label="Kaspersky live cyberthreat map"></div>
+      <iframe src="https://livethreatmap.radware.com/" title="Radware Live Cyber Threat Map" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="fullscreen" style="width:100%;height:min(82vh,800px);min-height:560px;border:0;display:block;background:#050705" allowfullscreen></iframe>
     </div>
     <div class="threat-map-credit">
-      <span>THREAT INTELLIGENCE BY KASPERSKY</span>
-      <span>Official embedded live map · <a class="threat-map-open" href="https://cybermap.kaspersky.com/en/widget/" target="_blank" rel="noopener noreferrer">Widget source</a></span>
+      <span>THREAT INTELLIGENCE BY RADWARE</span>
+      <span>Powered by Radware Threat Intelligence · <a class="threat-map-open" href="https://livethreatmap.radware.com/" target="_blank" rel="noopener noreferrer">Open source map</a></span>
     </div>
   </div>
 </main>
@@ -105,6 +103,6 @@ document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('clic
   if (button) { button.classList.remove('open'); button.setAttribute('aria-expanded', 'false'); }
 }));
 </script>
-<script src="https://cybermap.kaspersky.com/assets/scripts/widget.js" async defer></script>
+
 </body>
 </html>
