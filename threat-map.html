@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Open the interactive Threatbutt cyber threat map from 0x0ps.">
+<meta name="description" content="Explore the live Kaspersky cyberthreat map embedded in 0x0ps.">
 <meta name="theme-color" content="#050705">
-<title>Threatbutt Cyber Threat Map | 0x0ps</title>
+<title>Live Cyber Threat Map | 0x0ps</title>
 <link rel="canonical" href="https://0x0ps.com/threat-map.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="0x0ps">
-<meta property="og:title" content="Threatbutt Cyber Threat Map | 0x0ps">
-<meta property="og:description" content="Explore the Threatbutt cyber threat map directly on 0x0ps.">
+<meta property="og:title" content="Live Cyber Threat Map | 0x0ps">
+<meta property="og:description" content="Explore the live Kaspersky cyberthreat map embedded in 0x0ps.">
 <meta property="og:url" content="https://0x0ps.com/threat-map.html">
 <link rel="stylesheet" href="style.css">
 <style>
@@ -26,6 +26,8 @@ body::before, body::after { display:none !important; }
 .threat-map-frame { position:relative; border:1px solid var(--border); background:#050705; box-shadow:0 0 0 1px rgba(167,255,50,.04),0 18px 60px rgba(0,0,0,.35); overflow:hidden; }
 .threat-map-frame::before { content:''; display:block; height:3px; background:linear-gradient(90deg,var(--accent),transparent 75%); }
 .threat-map-frame iframe { display:block; width:100%; height:min(82vh,1000px); min-height:560px; border:0; background:#050705; }
+.threat-map-open { color:var(--accent); text-decoration:none; }
+.threat-map-open:hover { text-decoration:underline; }
 .threat-map-credit { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; color:var(--muted); font-size:10px; letter-spacing:.12em; text-transform:uppercase; margin-top:12px; }
 @media(max-width:700px) { .threat-map-page { padding:26px 12px 32px; } .threat-map-frame iframe { height:78vh; min-height:480px; } }
 </style>
@@ -63,20 +65,24 @@ body::before, body::after { display:none !important; }
   <div class="threat-map-inner">
     <header class="threat-map-heading">
       <div>
-        <p class="threat-map-eyebrow">// THREAT INTELLIGENCE // THREATBUTT</p>
-        <h1>THREATBUTT <span>MAP</span></h1>
-        <p class="threat-map-description">Explore the Threatbutt cyber threat map directly inside 0x0ps. Interactivity and zoom depend on the source map's embedding support.</p>
+        <p class="threat-map-eyebrow">// THREAT INTELLIGENCE // LIVE FEED</p>
+        <h1>GLOBAL <span>THREAT MAP</span></h1>
+        <p class="threat-map-description">Live cyberthreat activity visualized by Kaspersky. Use the embedded map controls to explore the globe and inspect threat events. This is global telemetry, not a view of attacks specifically targeting this website.</p>
       </div>
+      <a class="btn" href="https://cybermap.kaspersky.com/en/" target="_blank" rel="noopener noreferrer">OPEN FULL MAP ↗</a>
     </header>
-    <div class="threat-map-frame" style="padding:clamp(28px,6vw,76px);text-align:center;">
-      <p class="threat-map-eyebrow">// EXTERNAL MAP SOURCE</p>
-      <h2 style="color:#fff;font:800 clamp(1.2rem,3vw,2rem)/1.3 'Orbitron',monospace;margin:14px 0;">THREATBUTT <span style="color:var(--accent);">MAP</span></h2>
-      <p class="threat-map-description" style="margin:0 auto 24px;">Threatbutt blocks being displayed inside this page. Open the live map directly in a new tab to use its interactive controls.</p>
-      <a class="btn btn-primary" href="https://threatbutt-beta.github.io/" target="_blank" rel="noopener noreferrer">OPEN INTERACTIVE MAP ↗</a>
+    <div class="threat-map-frame">
+      <iframe
+        src="https://cybermap.kaspersky.com/en/widget/dynamic/dark"
+        title="Kaspersky live cyberthreat map"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
     </div>
     <div class="threat-map-credit">
-      <span>THREATBUTT // EXTERNAL INTERACTIVE MAP</span>
-      <span>The map opens on its own source website</span>
+      <span>THREAT INTELLIGENCE BY KASPERSKY</span>
+      <span>Official embedded live map · <a class="threat-map-open" href="https://cybermap.kaspersky.com/en/widget/" target="_blank" rel="noopener noreferrer">Widget source</a></span>
     </div>
   </div>
 </main>
