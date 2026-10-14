@@ -521,21 +521,46 @@ nav a { padding-left: clamp(4px, 0.5vw, 8px); padding-right: clamp(4px, 0.5vw, 8
 }
 
 
-/* MOBILE NAV FIX: keep every destination, including Threat Map, reachable on short screens */
+/* MOBILE NAV PATCH: isolate drawer styling from desktop active-link underline */
 @media screen and (max-width: 768px) {
-  .mobile-nav {
+  nav.mobile-nav,
+  div.mobile-nav {
+    display: none;
+    position: fixed;
+    top: 52px;
+    left: 0;
+    right: 0;
+    width: 100%;
     max-height: calc(100vh - 52px);
     max-height: calc(100dvh - 52px);
+    overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px 0 16px;
+    background: rgba(5,7,5,0.98);
+    border-bottom: 1px solid var(--border);
     z-index: 1000;
   }
+  nav.mobile-nav.open,
+  div.mobile-nav.open {
+    display: flex !important;
+  }
+  .mobile-nav a,
   .mobile-nav a[href="threat-map.html"] {
     display: flex !important;
+    position: relative;
+    flex: 0 0 auto;
+    width: 100%;
+    min-height: 48px;
     visibility: visible !important;
     opacity: 1 !important;
-    flex: 0 0 auto;
-    position: relative;
+  }
+  /* The desktop underline was bleeding into the vertical mobile drawer. */
+  .mobile-nav a.active::after {
+    content: none !important;
+    display: none !important;
   }
 }
