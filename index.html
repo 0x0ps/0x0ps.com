@@ -226,11 +226,11 @@
   @media(prefers-reduced-motion:reduce){.home-note-card{transition:none}.home-note-card:hover{transform:none}}
 
   /* 1980s CRT terminal glitch: phosphor glow, scanlines and brief signal dropouts. */
-  .hero h1.glitch-name{position:relative;isolation:isolate;color:#b7ff8a;text-shadow:0 0 2px #a7ff32,0 0 9px rgba(167,255,50,.42);animation:crt-flicker 5.2s steps(1,end) infinite}
+  .hero h1.glitch-name{position:relative;isolation:isolate;color:#b7ff8a;text-shadow:0 0 2px #a7ff32,0 0 9px rgba(167,255,50,.42);animation:crt-flicker 3.2s steps(1,end) infinite}
   .hero h1.glitch-name .accent{color:#a7ff32;text-shadow:0 0 3px #a7ff32,0 0 12px rgba(167,255,50,.65)}
   .hero h1.glitch-name::before,.hero h1.glitch-name::after{content:attr(data-text);position:absolute;inset:0;pointer-events:none;white-space:nowrap;overflow:hidden;opacity:0;color:#caffae;text-shadow:0 0 5px rgba(167,255,50,.8);z-index:2}
-  .hero h1.glitch-name::before{animation:crt-slice-a 5.2s steps(1,end) infinite}
-  .hero h1.glitch-name::after{animation:crt-slice-b 5.2s steps(1,end) infinite}
+  .hero h1.glitch-name::before{animation:crt-slice-a 3.2s steps(1,end) infinite}
+  .hero h1.glitch-name::after{animation:crt-slice-b 3.2s steps(1,end) infinite}
   @keyframes crt-flicker{0%,18%,20%,57%,59%,100%{opacity:1}19%{opacity:.92}58%{opacity:.96}91%{opacity:1}92%{opacity:.82}93%{opacity:1}}
   @keyframes crt-slice-a{0%,87%,91%,100%{opacity:0;clip-path:inset(0 0 100% 0);transform:translateX(0)}88%{opacity:.9;clip-path:inset(12% 0 74% 0);transform:translateX(5px)}89%{opacity:.8;clip-path:inset(61% 0 22% 0);transform:translateX(-3px)}90%{opacity:.7;clip-path:inset(38% 0 48% 0);transform:translateX(2px)}}
   @keyframes crt-slice-b{0%,87%,91%,100%{opacity:0;clip-path:inset(100% 0 0 0);transform:translateX(0)}88.5%{opacity:.8;clip-path:inset(43% 0 39% 0);transform:translateX(-5px)}89.5%{opacity:.75;clip-path:inset(78% 0 8% 0);transform:translateX(3px)}}
