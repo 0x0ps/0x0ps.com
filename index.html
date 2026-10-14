@@ -229,6 +229,20 @@
   }
   .electric-traces .electric-bolt path:nth-child(2) { animation-delay: .08s; }
   .electric-traces .electric-bolt path:nth-child(3) { animation-delay: .16s; }
+  .electric-traces .electric-ring {
+    fill: none; stroke: #eaff9a; stroke-width: 2.8; stroke-linecap: round;
+    stroke-dasharray: 22 493; stroke-dashoffset: 515; opacity: 0;
+    filter: url(#electric-neon);
+    animation: ring-surge 3.5s linear infinite;
+    animation-delay: .12s;
+  }
+  @keyframes ring-surge {
+    0%, 47%, 100% { stroke-dashoffset: 515; opacity: 0; }
+    50% { opacity: 1; }
+    72% { stroke-dashoffset: 0; opacity: 1; }
+    80% { stroke-dashoffset: -493; opacity: .25; }
+    85% { opacity: 0; }
+  }
   @keyframes conductor-surge {
     0%, 48%, 100% { stroke-dashoffset: 202; opacity: 0; }
     51% { opacity: 1; }
@@ -353,6 +367,7 @@
               </feMerge>
             </filter>
           </defs>
+          <circle class="electric-ring" cx="100" cy="100" r="82"/>
           <g class="electric-bolt" filter="url(#electric-neon)">
             <path d="M20 100 L39 91 L48 98 L61 87 L70 94 L82 91 L91 97 L100 100"/>
             <path d="M180 100 L161 91 L152 98 L139 87 L130 94 L118 91 L109 97 L100 100"/>
