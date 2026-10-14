@@ -475,3 +475,44 @@ nav a { padding-left: clamp(4px, 0.5vw, 8px); padding-right: clamp(4px, 0.5vw, 8
     line-height: 1.2;
   }
 }
+
+
+/* NAV FIX: compact menu group anchored to the right on desktop */
+@media screen and (min-width: 769px) {
+  header.topbar {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    column-gap: 18px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  header.topbar > .topbar-left {
+    grid-column: 1;
+    min-width: 0 !important;
+  }
+  header.topbar > nav:not(.mobile-nav) {
+    grid-column: 2;
+    justify-self: end !important;
+    display: flex !important;
+    flex: none !important;
+    width: auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    justify-content: flex-end !important;
+    gap: 0 !important;
+    white-space: nowrap !important;
+  }
+  header.topbar > nav:not(.mobile-nav) a {
+    display: inline-block !important;
+    flex: none !important;
+    padding: 0 2px !important;
+    margin: 0 !important;
+    font-size: 7px !important;
+    letter-spacing: 0 !important;
+    white-space: nowrap !important;
+  }
+  header.topbar > .hamburger {
+    display: none !important;
+  }
+}
