@@ -241,12 +241,8 @@
   .st .n { font-size: clamp(1.25rem, 2.3vw, 1.9rem); }
   @media (max-width: 860px) { .hero-summary { margin-top: -20px; } }
 
-  .home-notes { padding: clamp(44px, 6vw, 80px) clamp(20px, 5vw, 60px); background:#000; border-bottom:1px solid var(--border); }
-  .home-notes-inner { max-width:1200px; margin:0 auto; }
-  .home-notes-heading { display:flex; justify-content:space-between; align-items:end; gap:20px; flex-wrap:wrap; margin-bottom:28px; }
   .home-notes-heading h2 { font:700 clamp(1.2rem,3vw,1.8rem) 'Orbitron',monospace; color:#fff; }
   .home-notes-heading h2 span { color:var(--accent); }
-  .home-notes-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:12px; }
   .home-note-card { display:flex; flex-direction:column; gap:12px; min-height:210px; padding:24px; background:#050705; border:1px solid var(--border); text-decoration:none; transition:border-color .2s,transform .2s; }
   .home-note-card:hover { border-color:var(--accent); transform:translateY(-3px); }
   .home-note-card small { color:var(--accent); font-size:10px; letter-spacing:.18em; text-transform:uppercase; }
@@ -373,29 +369,6 @@
   </div>
 </section>
 
-<section class="home-notes" aria-labelledby="latest-notes-title">
-  <div class="home-notes-inner">
-    <div class="home-notes-heading">
-      <div><p class="page-eyebrow">FIELD NOTES // PRACTICAL KNOWLEDGE</p><h2 id="latest-notes-title">BUILD. TEST. <span>DOCUMENT.</span></h2></div>
-      <a href="blog.html" class="btn btn-ghost">ALL FIELD NOTES ›</a>
-    </div>
-    <div class="home-notes-grid">
-      <a class="home-note-card" href="notes/kali-linux-i3wm-workstation.html">
-        <small>TUTORIAL // LINUX</small><h3>Building a Kali Linux i3wm Workstation</h3>
-        <p>Keyboard-driven workflow, Kitty terminal setup, repeatable layouts, and configuration hygiene.</p><span class="read-more">READ THE GUIDE ↗</span>
-      </a>
-      <a class="home-note-card" href="notes/proxmox-cybersecurity-home-lab.html">
-        <small>LAB NOTES // NETWORKING</small><h3>Building a Proxmox Cybersecurity Home Lab</h3>
-        <p>Plan network boundaries, virtual bridges, DNS resilience, snapshots, and safe testing zones.</p><span class="read-more">READ THE GUIDE ↗</span>
-      </a>
-      <a class="home-note-card" href="notes/mcp-security-testing-checklist.html"><small>AI SECURITY // MCP</small><h3>MCP Security Testing Checklist</h3><p>Review tool permissions, trust boundaries, untrusted inputs, secrets, and authorization boundaries.</p><span class="read-more">READ THE CHECKLIST ↗</span></a>
-      <a class="home-note-card" href="cheat-sheets.html">
-        <small>QUICK REFERENCE</small><h3>Cybersecurity Cheat Sheets</h3>
-        <p>Explore the site's growing command-reference library for Linux, networking, web, and AI security.</p><span class="read-more">EXPLORE REFERENCES ↗</span>
-      </a>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div>© 2026 DAVIDE VESENTINI — ALL RIGHTS RESERVED</div>
