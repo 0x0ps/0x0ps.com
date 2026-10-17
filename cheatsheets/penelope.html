@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Penelope shell handler cheat sheet: listener setup, session management, file transfer, port forwarding, modules, and operational notes for authorized security labs.">
+<title>Penelope Cheat Sheet | 0x0ps</title>
+<link rel="canonical" href="https://0x0ps.com/cheatsheets/penelope.html">
+<link rel="stylesheet" href="../style.css">
+<style>
+.cs-page{max-width:1100px;margin:0 auto;padding:clamp(30px,6vw,70px) clamp(16px,4vw,36px) 64px;width:100%;flex:1}.cs-head{border-bottom:1px solid var(--border);padding-bottom:26px;margin-bottom:26px}.cs-head h1{font:900 clamp(1.8rem,5vw,3.2rem)/1.1 'Orbitron',monospace;color:#fff;margin:10px 0 14px}.cs-head h1 em{font-style:normal;color:var(--accent)}.cs-intro{max-width:800px;color:#eee;font-size:13px;line-height:1.9}.back-link{display:inline-block;color:var(--accent);text-decoration:none;margin-bottom:22px;font:11px monospace;letter-spacing:.1em}.notice{border-left:2px solid var(--accent);background:#070b06;padding:14px 16px;color:var(--muted);font-size:11px;line-height:1.8;margin:20px 0}.cs-section{margin:30px 0}.cs-section h2{font:700 15px 'Orbitron',monospace;color:var(--accent);letter-spacing:.05em;margin-bottom:12px}.cs-section p,.cs-section li{font-size:12px;line-height:1.8;color:var(--muted)}.cmd{background:#030503;border:1px solid #202a20;margin:12px 0;padding:13px 14px;overflow-wrap:anywhere}.cmd-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px;color:var(--accent);font:10px monospace;letter-spacing:.08em}.cmd code{display:block;color:#f0fff0;font:12px/1.75 'Roboto Mono',monospace;white-space:pre-wrap;overflow-wrap:anywhere}.copy{background:transparent;border:1px solid #344334;color:var(--accent);padding:5px 8px;font:10px monospace;cursor:pointer}.copy:hover{border-color:var(--accent)}.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}.tag{border:1px solid #263126;color:var(--muted);padding:4px 7px;font:9px monospace}.quick-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:11px}.quick-table th,.quick-table td{border:1px solid #263126;padding:10px;text-align:left;vertical-align:top}.quick-table th{color:var(--accent);font-weight:600}.quick-table td{color:var(--muted)}.quick-table code{color:#f0fff0}.source-link{color:var(--accent);overflow-wrap:anywhere}
+</style></head>
+<body>
+<header class="topbar"><div class="topbar-left"><a href="../index.html" class="logo">DAVIDE<span>.</span>VESENTINI <span class="logo-handle">aka null0x</span></a></div><nav><a href="../index.html" data-short="~">HOME</a><a href="../about.html" data-short="A">ABOUT</a><a href="../projects.html" data-short="P">PROJECTS</a><a href="../certificates.html" data-short="C">CERTS</a><a href="../blog.html" data-short="B">FIELD NOTES</a><a href="../cheat-sheets.html" class="active" data-short="S" aria-current="page">CHEAT SHEETS</a><a href="../threat-map.html" data-short="T">THREAT MAP</a><a href="../contact.html" data-short="@">CONTACT</a></nav><button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="mobile-nav" aria-expanded="false" onclick="toggleMenu()"><span></span><span></span><span></span></button></header>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation"><a href="../index.html">Home</a><a href="../about.html">About</a><a href="../projects.html">Projects</a><a href="../certificates.html">Certifications</a><a href="../blog.html">Field Notes</a><a href="../cheat-sheets.html" class="active" aria-current="page">Cheat Sheets</a><a href="../threat-map.html">Threat Map</a><a href="../contact.html">Contact</a></nav>
+<div class="ticker"><div class="ticker-inner"><span>COMMAND REFERENCE</span><span class="sep">//</span><span>PENELOPE</span><span class="sep">//</span><span>RED TEAM OPERATIONS</span><span class="sep">//</span><span>0x0ps</span><span class="sep">//</span></div></div>
+<main class="cs-page">
+<a class="back-link" href="red-team-tooling.html">← RED TEAM TOOLING</a>
+<header class="cs-head"><p class="page-eyebrow">CHEAT SHEETS // CS-11</p><h1><em>PENELOPE</em> SHELL HANDLER</h1><p class="cs-intro">A practical quick reference for Penelope, an interactive shell handler that helps manage authorized lab sessions, listeners, transfers, and port forwarding. Commands may vary by Penelope version; use <code>help</code> in your installed build as the source of truth.</p><div class="tag-row"><span class="tag">SESSION MANAGEMENT</span><span class="tag">LISTENERS</span><span class="tag">FILE TRANSFER</span><span class="tag">PORT FORWARDING</span></div></header>
+<div class="notice"><strong>AUTHORIZED USE ONLY.</strong> Use only in systems and networks you own or have explicit permission to test. Treat session logs, transferred files, and collected artefacts as sensitive assessment data. Avoid collecting credentials or running privilege-escalation modules unless specifically in scope.</div>
+<section class="cs-section"><h2>01 / INSTALL & START</h2><p>Install from Kali's repositories, then start a listener on a chosen TCP port. Replace example ports and addresses with values from your isolated lab.</p>
+<div class="cmd"><div class="cmd-head"><span>INSTALL</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>sudo apt update && sudo apt install penelope</code></div>
+<div class="cmd"><div class="cmd-head"><span>START LISTENER</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>penelope -p 5000</code></div>
+<div class="cmd"><div class="cmd-head"><span>BUILT-IN HTTP FILE SERVER</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>penelope -s share</code></div>
+<p>The listener must be reachable from the lab target: verify routing, host firewall rules, and the interface address before troubleshooting the shell.</p></section>
+<section class="cs-section"><h2>02 / MAIN MENU & HELP</h2>
+<div class="cmd"><div class="cmd-head"><span>SHOW COMMAND REFERENCE</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>help</code></div>
+<div class="cmd"><div class="cmd-head"><span>LIST MODULES</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>modules</code></div>
+<div class="cmd"><div class="cmd-head"><span>REVIEW MENU COMMAND HISTORY</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>history</code></div>
+<p>Module names and availability can change between releases. Review each module before running it and confirm that its actions are permitted by the engagement scope.</p></section>
+<section class="cs-section"><h2>03 / SESSION MANAGEMENT</h2>
+<div class="cmd"><div class="cmd-head"><span>LIST ACTIVE SESSIONS</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>sessions</code></div>
+<div class="cmd"><div class="cmd-head"><span>SELECT SESSION WITHOUT ATTACHING</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>use 1</code></div>
+<div class="cmd"><div class="cmd-head"><span>INTERACT WITH A SESSION</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>interact 1</code></div>
+<div class="cmd"><div class="cmd-head"><span>DETACH FROM INTERACTIVE SHELL</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>Ctrl-D</code></div>
+<div class="cmd"><div class="cmd-head"><span>TERMINATE A SESSION — DESTRUCTIVE</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>kill 1</code></div>
+<p>Replace <code>1</code> with the session ID shown by <code>sessions</code>. Detaching is not the same as terminating: confirm the intended action before using <code>kill</code>.</p></section>
+<section class="cs-section"><h2>04 / FILE TRANSFER</h2>
+<div class="cmd"><div class="cmd-head"><span>UPLOAD A LOCAL FILE</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>upload ./report.txt</code></div>
+<div class="cmd"><div class="cmd-head"><span>DOWNLOAD A TARGET FILE</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>download /path/to/approved-file.txt</code></div>
+<p>Confirm the active session and destination before transferring. Downloaded files are commonly stored in the relevant session directory under Penelope's local data folder; check your version's output for the exact path.</p></section>
+<section class="cs-section"><h2>05 / PORT FORWARDING</h2>
+<p>Port forwarding can make a service bound to a target's loopback interface reachable through an existing authorized session. The syntax below reflects the command style documented in the referenced walkthrough; check <code>help</code> if your version differs.</p>
+<div class="cmd"><div class="cmd-head"><span>EXAMPLE: FORWARD LOCAL SERVICE</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>portfwd 127.0.0.1:8080 -> 127.0.0.1:8080</code></div>
+<p>After creating the forward, test the local endpoint (for example, <code>http://127.0.0.1:8080</code>). Use only a service in scope, and remove the forward when the test is complete.</p></section>
+<section class="cs-section"><h2>06 / LISTENERS & CONNECTIONS</h2>
+<div class="cmd"><div class="cmd-head"><span>LIST ACTIVE LISTENERS</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>listeners</code></div>
+<div class="cmd"><div class="cmd-head"><span>ADD A LISTENER ON A LAB INTERFACE</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>listeners add -i 192.0.2.10 -p 8888</code></div>
+<div class="cmd"><div class="cmd-head"><span>CONNECT TO AN APPROVED BIND SHELL</span><button class="copy" onclick="copyCmd(this)">COPY</button></div><code>connect 192.0.2.20 4321</code></div>
+<p><code>192.0.2.0/24</code> is a documentation-only example network. Replace these addresses only with lab endpoints you control. Listener binding and inbound firewall rules must match your lab design.</p></section>
+<section class="cs-section"><h2>07 / QUICK COMMAND MAP</h2>
+<table class="quick-table"><thead><tr><th>Command</th><th>Purpose</th><th>Note</th></tr></thead><tbody>
+<tr><td><code>help</code></td><td>Show available commands</td><td>Best first stop for version-specific syntax.</td></tr>
+<tr><td><code>modules</code></td><td>List helper modules</td><td>Review module behaviour and scope first.</td></tr>
+<tr><td><code>sessions</code></td><td>Show sessions</td><td>Use IDs from the current output.</td></tr>
+<tr><td><code>use ID</code></td><td>Select a session</td><td>Does not necessarily attach interactively.</td></tr>
+<tr><td><code>interact ID</code></td><td>Attach to a session</td><td>Use the correct session ID.</td></tr>
+<tr><td><code>upload FILE</code></td><td>Transfer local file to target</td><td>Verify destination and scope.</td></tr>
+<tr><td><code>download PATH</code></td><td>Retrieve target file</td><td>Handle collected data securely.</td></tr>
+<tr><td><code>history</code></td><td>Review menu history</td><td>Useful for notes and reproducibility.</td></tr>
+<tr><td><code>kill ID</code></td><td>Terminate a session</td><td>Destructive; double-check the ID.</td></tr>
+</tbody></table></section>
+<section class="cs-section"><h2>08 / OPERATOR CHECKLIST</h2><ul><li>Confirm authorization, target scope, callback address, and port before starting.</li><li>Use a dedicated lab listener and verify host firewall and routing.</li><li>Record session IDs and keep notes of commands and timestamps.</li><li>Minimize collection of secrets and personal data; protect logs and downloads.</li><li>Close sessions, listeners, forwards, and temporary services when finished.</li><li>Coordinate cleanup with the system owner and preserve evidence if the engagement requires it.</li></ul></section>
+<section class="cs-section"><h2>REFERENCE</h2><p>Based on the Penelope workflow overview in Hacking Articles. This page is an independently organized quick reference, not a reproduction of the source article.</p><p><a class="source-link" href="https://www.hackingarticles.in/penelope-a-modern-alternative-to-netcat-for-red-teamers/" target="_blank" rel="noopener noreferrer">Hacking Articles — Penelope: A Modern Alternative to Netcat for Red Teamers ↗</a></p></section>
+</main>
+<footer><div>© 2026 DAVIDE VESENTINI — ALL RIGHTS RESERVED</div><div style="display:flex;gap:18px;flex-wrap:wrap;"><a href="../about.html">ABOUT</a><a href="../projects.html">PROJECTS</a><a href="../certificates.html">CERTS</a><a href="../blog.html">FIELD NOTES</a><a href="../cheat-sheets.html">CHEAT SHEETS</a><a href="../threat-map.html">THREAT MAP</a><a href="../contact.html">CONTACT</a></div><div class="footer-signal">● SIGNAL ACTIVE</div></footer>
+<script>
+function toggleMenu(){const menu=document.getElementById('mobile-nav'),btn=document.getElementById('hamburger');if(!menu||!btn)return;const open=menu.classList.toggle('open');btn.classList.toggle('open',open);btn.setAttribute('aria-expanded',String(open));}
+document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>{const menu=document.getElementById('mobile-nav'),btn=document.getElementById('hamburger');if(menu)menu.classList.remove('open');if(btn){btn.classList.remove('open');btn.setAttribute('aria-expanded','false');}}));
+function copyCmd(button){const code=button.closest('.cmd').querySelector('code');if(!code)return;const text=code.innerText;if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(()=>{const old=button.textContent;button.textContent='COPIED';setTimeout(()=>button.textContent=old,1200);}).catch(()=>fallbackCopy(text,button));}else fallbackCopy(text,button);}
+function fallbackCopy(text,button){const area=document.createElement('textarea');area.value=text;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();try{document.execCommand('copy');button.textContent='COPIED';setTimeout(()=>button.textContent='COPY',1200);}catch(e){button.textContent='SELECT TEXT';}area.remove();}
+</script>
+</body></html>
