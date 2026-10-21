@@ -33,7 +33,7 @@
 <h2>1. Proposed Proxmox VM</h2>
 <p>Create a new virtual machine in the Proxmox web interface. These are the settings used for this documented lab; adjust resources to your host capacity.</p>
 <ul><li><strong>VM name:</strong> <code>LabShock-OT</code></li><li><strong>Operating system:</strong> Ubuntu Server 24.04 LTS (64-bit)</li><li><strong>CPU:</strong> 4 vCPUs</li><li><strong>Memory:</strong> 8 GiB RAM</li><li><strong>Disk:</strong> 40 GiB, preferably on storage with enough free space for Docker images</li><li><strong>Network:</strong> a dedicated lab bridge or VLAN, with firewall rules appropriate for your environment</li></ul>
-<p>For a reproducible setup, use a DHCP reservation or a static address configured consistently with your subnet. In the example configuration below, the VM address is <code>10.69.1.181</code>. Replace it if your network uses a different address.</p>
+<p>For a reproducible setup, use a DHCP reservation or a static address configured consistently with your subnet. The examples use <code>192.0.2.50</code>, a documentation-only placeholder address. Replace it with the IP address assigned to your own lab VM before running the commands.</p>
 <h2>2. Install Ubuntu and prepare the VM</h2>
 <p>Install Ubuntu Server, create an administrative user, update the operating system, and verify that the VM can reach the repositories it needs.</p>
 <pre><code>sudo apt update
@@ -58,7 +58,7 @@ services:
   portal:
     image: zakharbz/labshock-portal:latest
     ports:
-      - '10.69.1.181:443:443'
+      - '192.0.2.50:443:443'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portal-data:/app/config/
@@ -89,8 +89,8 @@ sudo docker compose config</code></pre>
 <p>When the lab is launched from the portal, additional lab containers may be created. In the observed deployment, container names included <code>lab-plc-1</code>, <code>lab-hmi-1</code>, and <code>lab-nginx-1</code>, and the lab network was named <code>lab_l2_network</code>. Names and image versions may change between LabShock releases.</p>
 <h2>5. Open the web interfaces</h2>
 <p>From a client that is permitted to reach the lab VM, open the portal using the VM address:</p>
-<ul><li><strong>Portal:</strong> <code>https://10.69.1.181</code></li><li><strong>Observed login endpoint:</strong> <code>https://10.69.1.181:44001/login</code></li><li><strong>Observed lab interface:</strong> <code>https://10.69.1.181:44002/</code></li></ul>
-<p>These ports are the endpoints observed in this deployment, not a guarantee for every version or configuration. Use the actual published ports and service status from your own instance. A browser certificate warning may occur if the service uses a self-signed or locally issued certificate; verify that you are connecting to your own VM before proceeding.</p>
+<ul><li><strong>Portal:</strong> <code>https://YOUR-LAB-VM-IP</code> (replace the placeholder with your VM's IP address)</li></ul>
+<p>The portal address and available endpoints depend on your Compose configuration and LabShock version. Use the actual published ports for your instance. A browser certificate warning may occur if the service uses a self-signed or locally issued certificate; verify that you are connecting to your own VM before proceeding.</p>
 <h2>6. Troubleshooting checklist</h2>
 <ul><li><strong>Portal is unreachable:</strong> confirm the VM IP, the host firewall, Proxmox firewall rules, and whether TCP 443 is listening.</li><li><strong>Port binding fails:</strong> check whether another service already uses the same host IP and port.</li><li><strong>Containers restart repeatedly:</strong> inspect <code>docker compose logs</code>, check free disk space and memory, and validate the Compose file with <code>docker compose config</code>.</li><li><strong>Lab components do not launch:</strong> inspect the portal and launcher logs, confirm Docker is running, and review image-pull errors.</li><li><strong>Browser shows a CSRF or login error:</strong> use the expected hostname/IP consistently, enable cookies, and open the portal directly rather than reusing a stale form URL. Avoid disabling security controls to bypass the error.</li></ul>
 <h2>7. Safety and cleanup</h2>
