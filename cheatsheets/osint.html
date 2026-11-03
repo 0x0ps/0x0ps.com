@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="OSINT and reconnaissance search engines for authorized security research: internet exposure, attack surface discovery, Wi-Fi mapping, code search, certificates, and threat intelligence.">
 <meta name="theme-color" content="#050705">
-<title>OSINT — Search Engines | 0x0ps</title>
+<title>OSINT — Search Engines &amp; Google Dorking | 0x0ps</title>
 <link rel="canonical" href="https://0x0ps.com/cheatsheets/osint.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="0x0ps">
-<meta property="og:title" content="OSINT — Search Engines | 0x0ps">
+<meta property="og:title" content="OSINT — Search Engines &amp; Google Dorking | 0x0ps">
 <meta property="og:description" content="A curated directory of OSINT, reconnaissance, internet exposure, code search, certificate, and threat-intelligence resources.">
 <meta property="og:url" content="https://0x0ps.com/cheatsheets/osint.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OSINT — Search Engines | 0x0ps">
+<meta name="twitter:title" content="OSINT — Search Engines &amp; Google Dorking | 0x0ps">
 <meta name="twitter:description" content="A curated directory of OSINT and reconnaissance resources for authorized security research.">
 <link rel="stylesheet" href="../style.css">
 <style>
@@ -40,6 +40,17 @@
 .osint-url{font:10px monospace;color:#fff;opacity:.82;overflow-wrap:anywhere;margin-top:auto;padding-top:8px}
 .osint-note{margin:24px 0 0;padding:16px 18px;border-left:2px solid var(--accent);background:#050705;color:var(--muted);font-size:10px;line-height:1.9}
 @media(max-width:560px){.osint-card{min-height:0}.osint-filters{gap:6px}.osint-filter{padding:8px 9px}}
+
+.dork-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1px;background:#000;border:1px solid #000;margin-top:18px}
+.dork-card{background:#050705;padding:17px;display:flex;flex-direction:column;gap:10px;min-width:0;min-height:170px}
+.dork-card:hover{background:#080d07;outline:1px solid var(--accent);outline-offset:-1px}
+.dork-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.dork-card h3{font:700 12px 'Orbitron',monospace;color:#fff;margin:2px 0}
+.dork-query{display:block;color:#050705;background:var(--accent);padding:9px 10px;text-decoration:none;font:600 11px monospace;line-height:1.7;overflow-wrap:anywhere}
+.dork-query:hover{background:#fff;color:#050705}
+.dork-card p{font-size:10px;line-height:1.8;color:var(--muted);margin:0}
+.dork-warning{margin:22px 0 0;padding:15px 17px;border-left:2px solid var(--accent);background:#080d07;color:var(--muted);font-size:10px;line-height:1.9}
+.dork-warning strong{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -113,6 +124,26 @@
     <article class="osint-card" data-category="threat" data-tags="pulsedive threat intelligence ips domains malware reputation"><div class="osint-card-top"><span class="osint-number">[ 24 ]</span><span class="osint-category">THREAT INTEL</span></div><h2><a href="https://pulsedive.com/" target="_blank" rel="noopener noreferrer">pulsedive.com ↗</a></h2><p>Threat intelligence lookup for IP addresses, domains, indicators, and reputation context.</p><span class="osint-url">pulsedive.com</span></article>
   </div>
   </section>
+  <section class="osint-section google-dorking" aria-labelledby="google-dorking-title">
+    <div class="page-header"><p class="page-eyebrow">CHEAT SHEETS / OSINT / GOOGLE DORKING</p><h2 id="google-dorking-title">GOOGLE <em>DORKING</em></h2></div>
+    <p class="osint-intro">A practical collection of Google advanced-search operators for passive reconnaissance and security assessments. Replace <code>target.com</code> with a domain you own or are explicitly authorized to assess. Select a query to run it on Google.</p>
+    <div class="dork-grid">
+    <article class="dork-card"><div class="dork-top"><span class="osint-number">[ 01 ]</span><span class="osint-category">GOOGLE DORK</span></div><h3>Scope Filter</h3><a class="dork-query" href="https://www.google.com/search?q=site%3Atarget.com" target="_blank" rel="noopener noreferrer"><code>site:target.com</code><span aria-hidden="true"> ↗</span></a><p>Limits search results to the specified target domain.</p></article>
+    <article class="dork-card"><div class="dork-top"><span class="osint-number">[ 02 ]</span><span class="osint-category">GOOGLE DORK</span></div><h3>Subdomain Finder</h3><a class="dork-query" href="https://www.google.com/search?q=site%3Atarget.com%20-www" target="_blank" rel="noopener noreferrer"><code>site:target.com -www</code><span aria-hidden="true"> ↗</span></a><p>Excludes results containing www; useful as a rough search refinement, but not a reliable subdomain enumeration method.</p></article>
+    <article class="dork-card"><div class="dork-top"><span class="osint-number">[ 03 ]</span><span class="osint-category">GOOGLE DORK</span></div><h3>Public Documents</h3><a class="dork-query" href="https://www.google.com/search?q=site%3Atarget.com%20ext%3Apdf" target="_blank" rel="noopener noreferrer"><code>site:target.com ext:pdf</code><span aria-hidden="true"> ↗</span></a><p>Finds PDF documents indexed for the target domain. Review only material you are authorized to access.</p></article>
+    <article class="dork-card"><div class="dork-top"><span class="osint-number">[ 04 ]</span><span class="osint-category">GOOGLE DORK</span></div><h3>Configuration Files</h3><a class="dork-query" href="https://www.google.com/search?q=site%3Atarget.com%20(ext%3Axml%20OR%20ext%3Aconf%20OR%20ext%3Acnf)" target="_blank" rel="noopener noreferrer"><code>site:target.com (ext:xml OR ext:conf OR ext:cnf)</code><span aria-hidden="true"> ↗</span></a><p>Searches for indexed XML and configuration-file extensions. Do not access or use exposed secrets.</p></article>
+    <article class="dork-card"><div class="dork-top"><span class="osint-number">[ 05 ]</span><span class="osint-category">GOOGLE DORK</span></div><h3>Admin Portals</h3><a class="dork-query" href="https://www.google.com/search?q=site%3Atarget.com%20(inurl%3Aadmin%20OR%20inurl%3Alogin)" target="_blank" rel="noopener noreferrer"><code>site:target.com (inurl:admin OR inurl:login)</code><span aria-hidden="true"> ↗</span></a><p>Finds indexed administration and login pages; do not attempt access without explicit authorization.</p></article>
+    <article class="dork-card"><div class="dork-top"><span class="osint-number">[ 06 ]</span><span class="osint-category">GOOGLE DORK</span></div><h3>Open Directories</h3><a class="dork-query" href="https://www.google.com/search?q=intitle%3A%22index%20of%22%20%22parent%20directory%22" target="_blank" rel="noopener noreferrer"><code>intitle:"index of" "parent directory"</code><span aria-hidden="true"> ↗</span></a><p>Finds pages that appear to expose directory listings.</p></article>
+    <article class="dork-card"><div class="dork-top"><span class="osint-number">[ 07 ]</span><span class="osint-category">GOOGLE DORK</span></div><h3>SQL Error Messages</h3><a class="dork-query" href="https://www.google.com/search?q=site%3Atarget.com%20intext%3A%22sql%20syntax%20near%22" target="_blank" rel="noopener noreferrer"><code>site:target.com intext:"sql syntax near"</code><span aria-hidden="true"> ↗</span></a><p>Searches for pages containing a common SQL error string; a result alone does not prove SQL injection.</p></article>
+    <article class="dork-card"><div class="dork-top"><span class="osint-number">[ 08 ]</span><span class="osint-category">GOOGLE DORK</span></div><h3>Pastebin References</h3><a class="dork-query" href="https://www.google.com/search?q=site%3Apastebin.com%20%22target.com%22" target="_blank" rel="noopener noreferrer"><code>site:pastebin.com "target.com"</code><span aria-hidden="true"> ↗</span></a><p>Finds public Pastebin pages mentioning the target domain. Do not retrieve, share, or test credentials.</p></article>
+    <article class="dork-card"><div class="dork-top"><span class="osint-number">[ 09 ]</span><span class="osint-category">GOOGLE DORK</span></div><h3>GitHub References</h3><a class="dork-query" href="https://www.google.com/search?q=site%3Agithub.com%20%22target.com%22" target="_blank" rel="noopener noreferrer"><code>site:github.com "target.com"</code><span aria-hidden="true"> ↗</span></a><p>Finds public GitHub pages referencing the target domain; verify findings responsibly and report exposed secrets.</p></article>
+    <article class="dork-card"><div class="dork-top"><span class="osint-number">[ 10 ]</span><span class="osint-category">GOOGLE DORK</span></div><h3>Log Files</h3><a class="dork-query" href="https://www.google.com/search?q=filetype%3Alog%20intext%3Apassword" target="_blank" rel="noopener noreferrer"><code>filetype:log intext:password</code><span aria-hidden="true"> ↗</span></a><p>Searches indexed log files for password-related text. Avoid opening, copying, or using credentials.</p></article>
+    <article class="dork-card"><div class="dork-top"><span class="osint-number">[ 11 ]</span><span class="osint-category">GOOGLE DORK</span></div><h3>Environment Files</h3><a class="dork-query" href="https://www.google.com/search?q=intext%3A%22index%20of%20%2F%22%20%22.env%22" target="_blank" rel="noopener noreferrer"><code>intext:"index of /" ".env"</code><span aria-hidden="true"> ↗</span></a><p>Looks for directory listings that mention .env files. Treat any discovered secrets as sensitive.</p></article>
+    <article class="dork-card"><div class="dork-top"><span class="osint-number">[ 12 ]</span><span class="osint-category">GOOGLE DORK</span></div><h3>Backup Files</h3><a class="dork-query" href="https://www.google.com/search?q=site%3Atarget.com%20(ext%3Abkf%20OR%20ext%3Abkp%20OR%20ext%3Abak)" target="_blank" rel="noopener noreferrer"><code>site:target.com (ext:bkf OR ext:bkp OR ext:bak)</code><span aria-hidden="true"> ↗</span></a><p>Searches for common backup-file extensions indexed under the target domain.</p></article>
+    </div>
+    <p class="dork-warning"><strong>AUTHORIZED USE ONLY //</strong> These queries may surface sensitive documents, credentials, configuration files, logs, or administrative interfaces. Use them only within an approved scope. Do not access, download, disclose, or use exposed secrets or attempt to log in to discovered systems. Report accidental exposure through the owner's responsible-disclosure channel.</p>
+  </section>
+
   <p class="osint-note"><strong>OPERATOR NOTE //</strong> This directory is a starting point for passive research and authorized security assessments. Search results can be incomplete, outdated, or inaccurate. Validate findings with reliable sources and only investigate systems you own or are explicitly authorized to assess.</p>
 </main>
 <footer>
