@@ -18,6 +18,19 @@
 <link rel="stylesheet" href="../style.css">
 <style>
 .osint-intro{max-width:820px;color:var(--muted);font-size:12px;line-height:1.9;margin-bottom:24px}
+.osint-accordion{border:1px solid var(--border);background:#050705;margin:0 0 14px}
+.osint-accordion>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 24px;color:var(--accent);font:700 14px 'Orbitron',monospace;letter-spacing:.08em;transition:background .2s,border-color .2s}
+.osint-accordion>summary::-webkit-details-marker{display:none}
+.osint-accordion>summary::after{content:'+';font:700 22px monospace;color:var(--accent);flex:0 0 auto}
+.osint-accordion[open]>summary::after{content:'−'}
+.osint-accordion>summary:hover,.osint-accordion[open]>summary{background:#080d07}
+.osint-accordion>summary:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.osint-panel{padding:0 22px 22px;border-top:1px solid var(--border)}
+.osint-panel>.page-header{padding-top:20px}
+.osint-panel>.page-header .page-eyebrow{display:none}
+.osint-panel>.osint-intro{margin-top:16px}
+.osint-panel .dork-grid{margin-top:18px}
+@media(max-width:560px){.osint-accordion>summary{padding:18px 16px;font-size:12px}.osint-panel{padding:0 12px 16px}}
 .osint-toolbar{display:grid;grid-template-columns:1fr;gap:8px;max-width:620px;margin:0 0 18px}
 .osint-toolbar label{font-size:10px;letter-spacing:.14em;color:var(--accent)}
 .osint-toolbar input{background:#000;border:1px solid var(--border);color:#fff;padding:12px;font:12px monospace;outline:none}
@@ -76,9 +89,10 @@
 </div></div>
 <main class="page">
   <div class="page-header fade-up"><p class="page-eyebrow">CHEAT SHEETS / OSINT</p><h1>OSINT <em>&amp; RECON</em></h1></div>
-  <p class="osint-intro">A field directory of search engines and platforms useful for Open-Source Intelligence, external attack-surface discovery, infrastructure research, code reconnaissance, certificate analysis, and threat intelligence. Select any resource to open its website in a new tab.</p>
-  <section class="osint-section" aria-labelledby="search-engines-title">
-    <div class="page-header"><p class="page-eyebrow">CHEAT SHEETS / OSINT / SEARCH ENGINES</p><h2 id="search-engines-title">SEARCH <em>ENGINES</em></h2></div>
+  <p class="osint-intro">Select a section below to browse its resources. Each section opens only when selected.</p>
+  <details class="osint-accordion" id="search-engines">
+    <summary>SEARCH ENGINES</summary>
+    <div class="osint-panel">
     <p class="osint-intro">Search engines and specialist platforms for discovering public-facing infrastructure, services, code, certificates, exposed assets, and threat intelligence.</p>
   <div class="osint-toolbar">
     <label for="osint-search">SEARCH BY TOOL, PURPOSE OR CATEGORY</label>
@@ -123,9 +137,11 @@
     <article class="osint-card" data-category="vuln" data-tags="vulners cves exploits advisories vulnerabilities"><div class="osint-card-top"><span class="osint-number">[ 23 ]</span><span class="osint-category">VULNERABILITIES</span></div><h2><a href="https://vulners.com/" target="_blank" rel="noopener noreferrer">vulners.com ↗</a></h2><p>Search vulnerability intelligence, CVEs, exploit references, and security advisories.</p><span class="osint-url">vulners.com</span></article>
     <article class="osint-card" data-category="threat" data-tags="pulsedive threat intelligence ips domains malware reputation"><div class="osint-card-top"><span class="osint-number">[ 24 ]</span><span class="osint-category">THREAT INTEL</span></div><h2><a href="https://pulsedive.com/" target="_blank" rel="noopener noreferrer">pulsedive.com ↗</a></h2><p>Threat intelligence lookup for IP addresses, domains, indicators, and reputation context.</p><span class="osint-url">pulsedive.com</span></article>
   </div>
-  </section>
-  <section class="osint-section google-dorking" aria-labelledby="google-dorking-title">
-    <div class="page-header"><p class="page-eyebrow">CHEAT SHEETS / OSINT / GOOGLE DORKING</p><h2 id="google-dorking-title">GOOGLE <em>DORKING</em></h2></div>
+    </div>
+  </details>
+  <details class="osint-accordion google-dorking" id="google-dorking">
+    <summary>GOOGLE DORKING</summary>
+    <div class="osint-panel">
     <p class="osint-intro">A practical collection of Google advanced-search operators for passive reconnaissance and security assessments. Replace <code>target.com</code> with a domain you own or are explicitly authorized to assess. Select a query to run it on Google.</p>
     <div class="dork-grid">
     <article class="dork-card"><div class="dork-top"><span class="osint-number">[ 01 ]</span><span class="osint-category">GOOGLE DORK</span></div><h3>Scope Filter</h3><a class="dork-query" href="https://www.google.com/search?q=site%3Atarget.com" target="_blank" rel="noopener noreferrer"><code>site:target.com</code><span aria-hidden="true"> ↗</span></a><p>Limits search results to the specified target domain.</p></article>
@@ -142,7 +158,8 @@
     <article class="dork-card"><div class="dork-top"><span class="osint-number">[ 12 ]</span><span class="osint-category">GOOGLE DORK</span></div><h3>Backup Files</h3><a class="dork-query" href="https://www.google.com/search?q=site%3Atarget.com%20(ext%3Abkf%20OR%20ext%3Abkp%20OR%20ext%3Abak)" target="_blank" rel="noopener noreferrer"><code>site:target.com (ext:bkf OR ext:bkp OR ext:bak)</code><span aria-hidden="true"> ↗</span></a><p>Searches for common backup-file extensions indexed under the target domain.</p></article>
     </div>
     <p class="dork-warning"><strong>AUTHORIZED USE ONLY //</strong> These queries may surface sensitive documents, credentials, configuration files, logs, or administrative interfaces. Use them only within an approved scope. Do not access, download, disclose, or use exposed secrets or attempt to log in to discovered systems. Report accidental exposure through the owner's responsible-disclosure channel.</p>
-  </section>
+    </div>
+  </details>
 
   <p class="osint-note"><strong>OPERATOR NOTE //</strong> This directory is a starting point for passive research and authorized security assessments. Search results can be incomplete, outdated, or inaccurate. Validate findings with reliable sources and only investigate systems you own or are explicitly authorized to assess.</p>
 </main>
