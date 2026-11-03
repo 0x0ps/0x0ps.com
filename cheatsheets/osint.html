@@ -176,6 +176,56 @@
     </div>
   </details>
 
+  <details class="osint-accordion" id="osiris">
+    <summary>OSIRIS</summary>
+    <div class="osint-panel">
+      <p class="osint-intro">OSIRIS (Open Source Intelligence) is a browser-based global intelligence dashboard that brings multiple public-data feeds together on an interactive world map. It is designed for situational awareness and exploratory OSINT, rather than as a standalone verification or investigative system.</p>
+
+      <div class="osint-grid">
+        <article class="osint-card">
+          <div class="osint-card-top"><span class="osint-number">[ 01 ]</span><span class="osint-category">GLOBAL MONITORING</span></div>
+          <h2>LIVE GEOINT &amp; SITUATIONAL AWARENESS</h2>
+          <p>Visualize public CCTV feeds, aircraft and maritime activity, satellite positions, earthquakes, weather events, conflict and high-risk areas, critical infrastructure datasets, news streams, and mapped cyber or malware threat indicators. Available layers and geographic coverage depend on the data provider.</p>
+          <span class="osint-url">GLOBAL MAP · MULTI-SOURCE OSINT</span>
+        </article>
+        <article class="osint-card">
+          <div class="osint-card-top"><span class="osint-number">[ 02 ]</span><span class="osint-category">ENTITY INVESTIGATION</span></div>
+          <h2>TRACK &amp; ENRICH</h2>
+          <p>Select mapped entities such as aircraft or vessels to inspect the associated public information and contextual details. The dashboard can help correlate locations, movements, events, and related open-source data during an initial research workflow.</p>
+          <span class="osint-url">AVIATION · MARITIME · SATELLITES</span>
+        </article>
+        <article class="osint-card">
+          <div class="osint-card-top"><span class="osint-number">[ 03 ]</span><span class="osint-category">INTELLIGENCE LAYERS</span></div>
+          <h2>CONTEXT &amp; EARLY WARNING</h2>
+          <p>Toggle map layers to build a regional picture of incidents, conflict zones, infrastructure, environmental events, and public information feeds. Some builds also expose market-analysis or AI-assisted overview features; treat these as experimental context, never as financial or operational advice.</p>
+          <span class="osint-url">MAP LAYERS · ALERTS · NEWS</span>
+        </article>
+      </div>
+
+      <div class="osint-note"><strong>HOW TO USE IT //</strong> Open the live map below, enable only the layers relevant to your research, zoom into the area of interest, and select individual markers to inspect their available context. Cross-check important findings with the original provider and independent sources. Data may be delayed, incomplete, geographically biased, or unavailable.</div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:24px 0 12px">
+        <h2 style="font:700 14px 'Orbitron',monospace;color:var(--accent);margin:0;letter-spacing:.08em">OSIRIS // LIVE VIEW</h2>
+        <a href="https://osirisai.live/" target="_blank" rel="noopener noreferrer" style="font:10px monospace;color:var(--accent);text-decoration:none">OPEN FULL DASHBOARD ↗</a>
+      </div>
+      <div style="border:1px solid var(--border);background:#050705;overflow:hidden">
+        <iframe
+          src="https://osirisai.live/"
+          title="OSIRIS live global intelligence dashboard"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="fullscreen; geolocation"
+          allowfullscreen
+          style="display:block;width:100%;height:760px;border:0;background:#050705"
+        ></iframe>
+      </div>
+      <p style="font-size:10px;line-height:1.8;color:var(--muted);margin:10px 0 0">If the live dashboard does not load inside this frame, use <a href="https://osirisai.live/" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Open full dashboard</a>. The embedded view is provided by the external OSIRIS service and may be unavailable or restricted by its own security and framing policies.</p>
+
+      <p class="dork-warning"><strong>AUTHORIZED &amp; RESPONSIBLE USE //</strong> OSIRIS aggregates information from third-party public sources. A camera feed being publicly reachable does not automatically make every use lawful or appropriate. Respect privacy, local law, provider terms, and operational-security considerations. Do not use the dashboard to stalk individuals, target protected infrastructure, or interfere with aircraft, vessels, cameras, or other systems. Treat mapped threat and conflict indicators as leads that require independent validation.</p>
+      <p style="font-size:10px;line-height:1.8;color:var(--muted);margin:14px 0 0">Source article: <a href="https://hackers-arise.com/open-source-intelligence-osint-using-osiris-for-global-intelligence/" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Hackers Arise — Using Osiris for Global Intelligence</a> · Live dashboard: <a href="https://osirisai.live/" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">osirisai.live</a> · Project reference: <a href="https://github.com/Isaac2/osiris" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">GitHub</a>.</p>
+    </div>
+  </details>
+
   <p class="osint-note"><strong>OPERATOR NOTE //</strong> This directory is a starting point for passive research and authorized security assessments. Search results can be incomplete, outdated, or inaccurate. Validate findings with reliable sources and only investigate systems you own or are explicitly authorized to assess.</p>
 </main>
 <footer>
