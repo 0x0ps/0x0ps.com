@@ -160,6 +160,44 @@
     </div>
   </details>
 
+  <details class="osint-accordion" id="blackbird">
+    <summary>BLACKBIRD</summary>
+    <div class="osint-panel">
+      <p class="osint-intro">Blackbird is an OSINT username and email discovery tool. It checks whether a supplied identifier appears across hundreds of online platforms, bringing distributed account-presence checks into one workflow. Use results as investigative leads, not proof that accounts belong to the same person.</p>
+
+      <div class="osint-grid">
+        <article class="osint-card">
+          <div class="osint-card-top"><span class="osint-number">[ 01 ]</span><span class="osint-category">IDENTITY DISCOVERY</span></div>
+          <h2>USERNAME &amp; EMAIL SEARCH</h2>
+          <p>Search a username or email address across a large set of websites and social platforms. Username lookups integrate the community-maintained WhatsMyName dataset, which provides the underlying site checks.</p>
+          <span class="osint-url">USERNAME ENUMERATION · EMAIL PRESENCE</span>
+        </article>
+        <article class="osint-card">
+          <div class="osint-card-top"><span class="osint-number">[ 02 ]</span><span class="osint-category">RESULT ANALYSIS</span></div>
+          <h2>FILTERS &amp; REPORTING</h2>
+          <p>Review detected profiles, apply filters, and export findings in formats such as PDF or CSV. Treat matches as candidate accounts: usernames can be shared, platform responses change, and automated checks can produce false positives or miss accounts.</p>
+          <span class="osint-url">RESULT TRIAGE · PDF / CSV EXPORT</span>
+        </article>
+        <article class="osint-card">
+          <div class="osint-card-top"><span class="osint-number">[ 03 ]</span><span class="osint-category">AI-ASSISTED CONTEXT</span></div>
+          <h2>OPTIONAL AI PROFILE</h2>
+          <p>The project documentation describes an optional AI summary based on the names of services where matches were reported. This is contextual inference, not identity verification or evidence of a person's interests, behavior, or real-world identity.</p>
+          <span class="osint-url">AI SUMMARY · VERIFY EVERY LEAD</span>
+        </article>
+      </div>
+
+      <div class="osint-note"><strong>WORKFLOW //</strong> Start with an identifier you are authorized to investigate. Review each returned platform URL manually, compare independent signals before correlating accounts, record the date and method, and preserve only information necessary for the defined purpose. A negative email search is not evidence that an address has no online accounts; coverage is limited to the services checked.</div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 10px">
+        <a href="https://cranefomo.github.io/blackbird/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 18px;border:1px solid var(--accent);background:var(--accent);color:#050705;font:700 11px 'Orbitron',monospace;letter-spacing:.08em;text-decoration:none">OPEN BLACKBIRD ↗</a>
+        <a href="https://github.com/p1ngul1n0/blackbird" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border:1px solid var(--border);color:var(--accent);font:700 10px monospace;letter-spacing:.08em;text-decoration:none">SOURCE &amp; DOCUMENTATION ↗</a>
+      </div>
+
+      <p class="dork-warning"><strong>PRIVACY &amp; AUTHORIZED USE //</strong> Use this tool only where you have a lawful basis and a legitimate, proportionate purpose. Account discovery can expose personal information. Do not use it for stalking, harassment, doxxing, credential attacks, or decisions based on unverified matches. Check the current project documentation, platform terms, applicable data-protection rules, and the tool's data handling before use.</p>
+      <p style="font-size:10px;line-height:1.8;color:var(--muted);margin:14px 0 0">Project page: <a href="https://cranefomo.github.io/blackbird/" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Cranefomo / Blackbird</a> · Upstream project documentation: <a href="https://github.com/p1ngul1n0/blackbird" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">GitHub — p1ngul1n0/blackbird</a> · <a href="https://p1ngul1n0.gitbook.io/blackbird/" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Blackbird Docs</a>.</p>
+    </div>
+  </details>
+
   <details class="osint-accordion" id="shodan">
     <summary>SHODAN</summary>
     <div class="osint-panel">
